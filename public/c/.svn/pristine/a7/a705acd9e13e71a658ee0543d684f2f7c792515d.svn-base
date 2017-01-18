@@ -1,0 +1,483 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<!--AUI样式框架-->
+		<link rel="stylesheet" type="text/css" href="../css/aui/aui.min.css" />
+		<!--拓展AUI字体图标-->
+		<link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+		<!--通用样式-->
+		<link rel="stylesheet" type="text/css" href="../css/winu-ui.css" />
+		<style type="text/css">
+			.unread {
+				display: inline-block;
+				background: #15b5e9;
+				color: #fff;
+				font-size: 10px;
+				padding: 0 3px;
+				border-radius: 10px;
+				-webkit-border-radius: 10px;
+			}
+		</style>
+	
+		
+		
+		<script id="msglistTpl" type="text/x-dot-template">
+			{{~it:value:index}}
+			<li class="aui-user-view-cell aui-img winu-clear-both winu-min-height" data-conversationType="{{=value.conversationType}}" data-targetId="{{=value.user_info.id}}" data-targetName="{{=value.user_info.nick_name}}">
+			<img class="aui-img-object aui-pull-left" src="{{=(window.uploadUrl+value.user_info.photo)}}" style="width:48px;height:48px;">
+			<div class="aui-img-body">
+			<span>{{=value.chatInfo.username}}<em class="btime">{{=_formatDate(value.sentTime)}}</em></span>
+			<p class='aui-ellipsis-1 msgnr'>
+			{{=setLastMsgText(value,true)}}
+			{{=(value.unreadMessageCount==0||value.unreadMessageCount==undefined?"":"<font class='aui-pull-right unread'>"+value.unreadMessageCount+"</font>")}}
+			</p>
+			</div>
+			</li>
+			{{~}}
+		</script>
+		
+	</head>
+	<body>
+	<!--
+	<li class="'+bg_class+' aui-list-view-cell aui-img winu-clear-both winu-min-height" data-group="'+msgObj.group+'"'+
+	-->
+	   <div class="aui-content">
+			<span id="address"></span>
+			
+			
+		</div>
+		<div class="aui-content" id="msglist">
+			
+			
+			<ul class="aui-user-view"></ul>
+		</div>
+	</body>
+	<!--APICloud自带前端脚本-->
+	<script type="text/javascript" src="../script/api.js"></script>
+	<!--Zepto.js,类似Jquery-->
+	<script type="text/javascript" src="../script/zepto.min.js"></script>
+	<!--doT.js模板引擎-->
+	<script type="text/javascript" src="../script/doT.min.js"></script>
+	<!--linq.js json操作框架-->
+	<script type="text/javascript" src="../script/linq.min.js"></script>
+	<!--linq.js json操作框架-->
+	<script type="text/javascript" src="../script/coin.js"></script>	
+	<!--通用脚本库-->
+	
+
+
+	<script type="text/javascript" src="../script/winu-base.js"></script>
+	<script type="text/javascript">
+	
+
+		
+		// 1、设定
+		var rong = null, userJson = null,balanceJson=null,coinList={} ,coinBalance=[],users = [],usersList=[], coinsParam={},isFirst = true,address="";
+		var Prefix="Coin",List ={};
+		
+		//var assert = coin.assert
+		//2、设定钱包
+
+		// ~~~~~~~~~~~~~~~~~~~~~~开始~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        /*从服务器获得币种列表*/
+		function getList() {
+			
+			_ajax(window.serverUrl + "get"+Prefix+"List", "get", {
+			}, "json", function(ret) {
+			
+				   _getPrefs(window.coinBalance, function(val) {	
+				   		//var json = eval('(' + val + ')'); 
+				   		//var str =JSON.stringify(json)
+						//console.log(val);
+						//coinBalance =json
+						console.log(val);
+				   });					
+			
+				   _getPrefs(window.coinList, function(val) {	
+				   		var json = eval('(' + val + ')'); 
+				   		//var str =JSON.stringify(json)
+						//console.log(val);
+						coinList = json;
+				   		console.log(JSON.stringify(coinList));
+				   
+				   
+						//for(i=0;i<json.detail[i];i++){
+						
+						for(i=0;i<ret.detail.lenght;i++){
+						  
+						  var found= false;
+						  for(j=0;j<json.detail[j];j++){
+						  		if (json.detail[j].coin == ret.detail[i].coin){
+						  			console.log(JSON.stringify(ret.detail[i].coin));
+						  		  found = true
+						  		}
+						  }
+						  if (found== true){
+						  	json.detail.push(ret.detail[i].coin);
+							var str =JSON.stringify(json)
+							console.log(str);
+							//_setPrefs(window.coinList,str, function() {	
+							//});						  	
+						  	
+						  } 
+						
+						}	
+						
+							
+						
+						//}				   
+				   
+					});			
+
+			
+					coinList = ret;
+					/*
+					var str = JSON.stringify(ret);    
+				   _setPrefs(window.coinList, str, function() {	
+					});
+					*/		      
+
+
+				for (var i = 0; i < ret.detail.length; i++) {
+									
+					UpdateDetail(ret.detail[i]);				
+					
+				}
+				// 设置不是首次获取数据了
+				isFirst = false;
+				api.hideProgress();
+				api.refreshHeaderLoadDone();
+			});
+		}
+				
+		function buildAddress(detail,k1,k2,k3,callback){
+			//var k1="123123"
+			//var k2="223123"
+			//var k3="323123"
+			//var detail = coinList.detail
+			coin.wallet.getAddressByList(detail,k1,k2,k3,function(err,data){
+			  //console.log("buildAddress:",data)
+			  for (i=0;i<detail.length;i++){
+			    detail[i].address= data[i]
+			  }
+			   //return querys
+			  	 // console.log(JSON.stringify(detail));
+			 		callback(null,detail);
+			 })			      
+			      		
+		
+		}
+		function UpdateDetail(msgObj){
+		 	//console.log(msgObj);
+		 	
+
+			if ($("#msglist ul li[data-targetId='" + msgObj.coin + "']").size() > 0) {					   
+				var $newMsg = $("#msglist ul li[data-targetId='" + msgObj.coin + "']");
+				$newMsg.remove();	
+					
+				// 在第一次插入
+
+				addMsg(msgObj);
+				
+			} else {
+				// 插入新的
+				
+				addMsg(msgObj);
+			}
+			
+				
+		}	
+
+		function updataBalance(msgObj){
+		 	//console.log(JSON.stringify(msgObj));
+		 	
+
+			if ($("#msglist ul li[data-targetId='" + msgObj.coin + "']").size() > 0) {					   
+				var $newMsg = $("#msglist ul li[data-targetId='" + msgObj.coin + "']");
+					$newMsg.find("#balance").text(msgObj.total);
+							
+				if (msgObj.frozen>0){
+					$newMsg.find("#frozen_title").css("display","block");
+					$newMsg.find("#frozen").text(msgObj.frozen);
+				} else{
+					
+					$newMsg.find("#frozen_title").css("display","none");
+					//console.log(JSON.stringify($newMsg.find(".frozen")))
+					//$newMsg.find(".frozen").text(msgObj.frozen).addClass("hide");
+				}
+					
+
+			}
+			
+				
+		}	
+
+		function getBalance(){
+		  
+		/*
+			var querys =[
+			{"coin":"BTC","address":"337ZnDhg8PGeKaYgNu3TaWxfYTvGrgtw2g"},
+			{"coin":"LTC","address":"337ZnDhg8PGeKaYgNu3TaWxfYTvGrgtw2g"},
+			{"coin":"SIFC","address":"337ZnDhg8PGeKaYgNu3TaWxfYTvGrgtw2g"}
+			];
+		*/ 
+		
+		   // var querys = coinList.detail;
+			var url =window.serverUrl+"coin/getBalance?coin="
+			
+			api.showProgress();
+			 b = new coin.balance();			 
+			 b.getBalance(url,balanceJson,function(err,data){
+			 	 //console.log(JSON.stringify(data[1]))
+			 	 //console.log(data.length)
+			 	 //var j = data.length;
+			 	for (var i=0;i<data.length;i++){
+			 		if (data[i]!= null){
+			 		  console.log(JSON.stringify(data[i]))
+			 			updataBalance(data[i]);
+			 		}
+			 	}
+			  api.hideProgress();
+			  api.refreshHeaderLoadDone();
+			  console.log(JSON.stringify(balanceJson));
+			  console.log(JSON.stringify(data))
+			 })	
+			 
+		
+		}
+
+
+
+		function addMsg(msgObj) {	
+		     // alert(JSON.stringify(msgObj.eName));
+				var _arr = [];
+				_arr.push(msgObj);
+				var unread = 0;
+				var avatar ="";
+				var avatar2 ="";	
+				var bg_class ="aui-bg"; //aui-bg-info
+				var font_class="aui-text-blue";
+				avatar2 = window.uploadUrl+msgObj.eName+".png";
+				avatar2='<span class="avatar"><img class="aui-img-object aui-pull-left" src="'+avatar2+'" style="width:48px;height:48px;"></span>'
+
+			
+			var list ='<li class="'+bg_class+' aui-list-view-cell aui-img winu-clear-both winu-min-height" data-group="'+msgObj.group+'"'+
+			' data-targetId="'+msgObj.eName +'" data-targetName="'+msgObj.cName+'">'+ 	avatar2+
+			'<div class="aui-img-body">'+
+			'<span  class=" aui-pull-left">馀额:'+'<em id="balance" class="btime">0</em></span>'+		
+			'<span  id="frozen_title" style="display:none" class=" aui-pull-right">确认中:'+'<em id="frozen" class="btime">0</em></span>'+			
+			//'<p class="'+font_class+' aui-ellipsis-1 msgnr">'+avatar+setLastMsgText(msgObj,true)+
+			//{{=setLastMsgText(value,true)}}
+			//'<font class="aui-pull-right unread">'+unread+'</font>'+
+			//'</p>'+
+			'</div>'+
+			'</li>';
+
+				$("#msglist ul").append(list);		
+	
+		}
+		
+
+		function checkIfCoinKeyExist(){
+			_getPrefs(window.coinKey, function(val) {
+			 		
+				if (val && val!="") {	
+					//console.log(val);	
+					
+					_getPrefs(window.address, function(val) {
+					 		//console.log(val);
+						if (val && val!="") {			
+							$("#address").text(val)			
+							getBalance();
+						} else {
+							_openWin("coin_choose_address", "coin_choose_address_win.html");
+							
+							//_openWin("coin_choose_address", "coin_choose_address_win.html");
+						}							
+						
+					});						
+									
+					
+				} else {
+					_openWin("coin_password", "coin_password_win.html");
+					
+					//_openWin("coin_choose_address", "coin_choose_address_win.html");
+				}							
+				
+			});	
+		}
+		
+
+		Zepto(function($) {
+			// 绑定会话点击事件
+			$("#msglist").on("tap", "li", function() {
+				// 获取会话类型
+				
+			});
+		});
+		apiready = function() {
+			
+		   balanceJson = _getStorage(window.userKey + "balance");
+				
+			//地址已设定好，顺带修改
+			_addEventListener("addressChoosed", function(ret) {		
+				api.showProgress();
+				
+				var str = ret.value;
+				var datas =str.split(",")
+				//alert(JSON.stringify(data));
+					
+				
+
+				
+				buildAddress(coinList.detail,datas[0],datas[1],datas[2],function(err,data){
+					if(err){console.log(err)};
+					console.log(JSON.stringify(data))
+					_setStorage(window.userKey + "balance", data);
+
+
+
+										
+					
+					api.hideProgress();
+					api.refreshHeaderLoadDone();
+					
+
+				});
+				
+			});		
+			
+			_addEventListener("addressReady", function(ret) {	    
+				
+				if (ret && ret.value) {
+					 $("#address").text(ret.value)
+						_setPrefs(window.address, ret.value, function() {
+								console.log("address:",ret.value)
+						});						 
+							 
+				}
+			});	
+					
+			_addEventListener("coinKeyUpdated", function(ret) {
+			   //alert("");
+				
+			
+						 _openWin("coin_choose_address", "coin_choose_address_win.html");
+				
+				
+				
+				
+			});			
+			
+
+			api.refreshHeaderLoading();
+			// 15 获取用户信息
+			userJson = _getStorage(window.userKey + "h5");
+			
+			
+			// 15、下拉重新加载会话
+			_setRefreshHeaderInfo(function() {
+				
+				if (isFirst==true) {
+					
+					getList();
+					checkIfCoinKeyExist();
+				} else {
+					getBalance();
+					api.hideProgress();
+					api.refreshHeaderLoadDone();
+				}
+			});
+			
+		
+		
+		/*
+			_addEventListener("sendMsgStart", function(ret) {
+			   
+			    _toast(ret,50000);
+			    //
+				if (ret && ret.value) {
+					var msg = ret.value;
+					// 调用统一接口发送信息
+					rong_sendMsg(msg.msgType, msg.conversationType, msg.targetId, msg.content, msg.extra);
+				}
+			});	
+			
+			// 12
+
+			// 12. 监听用户信息更新时，重新初始化
+			_addEventListener("userUpdate", function(ret) {
+
+				api.refreshHeaderLoading();
+			});
+			// 14、监听是否会话需要获取最新消息
+			_addEventListener("getNewMsgStart", function(ret) {
+				if (ret && ret.value) {
+					var msg = ret.value;
+					// 获取最新消息
+					rong_getLatestMessages(msg.conversationType, msg.targetId);
+				}
+			});
+
+			// 17、监听是否会话需要获取历史消息
+			_addEventListener("getHistoryMsgStart", function(ret) {
+				if (ret && ret.value) {
+					var msg = ret.value;
+					// 获取最新消息
+					rong_getHistoryMessages(msg.conversationType, msg.targetId, msg.oldestMessageId);
+				}
+			});
+			// 21、监听是否退出登录
+			_addEventListener("logOut", function(ret) {
+				rong_logout();
+			});
+			// 24 监听是否加入群
+			_addEventListener("joinGroupStart", function(ret) {
+				if (ret && ret.value) {
+					var msg = ret.value;
+					// 加入
+					rong_joinGroup(msg.groupId, msg.groupName);
+				}
+			});
+			// 25、移除该会话
+			_addEventListener("removeChatStart", function(ret) {
+				if (ret && ret.value) {
+					var msg = ret.value;
+					// 移除
+					rong_removeConversation(msg.conversationType, msg.targetId);
+					// 重新加载会话
+					api.refreshHeaderLoading();
+				}
+			});
+			// 26 退出群监听
+			_addEventListener("quitGroupStart", function(ret) {
+				if (ret && ret.value) {
+					var msg = ret.value;
+					// 退出
+					rong_quitGroup(msg.groupId);
+				}
+			});
+			// 27、清除未读记录数
+			_addEventListener("clearMessages", function(ret) {
+			    
+				if (ret && ret.value) {
+					
+					var msg = ret.value;
+					rong_clearMessagesUnreadStatus(msg.conversationType, msg.targetId);
+					// 重新加载会话
+					rong_getConversationList();
+				}
+			});
+			*/
+			//
+			//makeTxid("BTC");
+			
+			
+		};
+	</script>
+</html>

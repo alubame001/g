@@ -1,0 +1,15 @@
+{
+  "name": "g",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bitcoinjs-lib": "^2.3.0",
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.5",
+    "express": "~4.14.0",
+    "socket.io": "^1.7.2"
+  }
+}

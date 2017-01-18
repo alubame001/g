@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/reset.css" type="text/css">
+        <link rel="stylesheet" href="css/main.css" type="text/css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,minimal-ui" />
+	<meta name="msapplication-tap-highlight" content="no"/>
+
+        <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="js/createjs-2013.12.12.min.js"></script>
+     
+  <script type="text/javascript" src="js/easeljs-0.8.2.min.js"></script>
+  <script type="text/javascript" src="js/TextInput.js"></script>
+
+
+
+        <script type="text/javascript" src="js/main.js"></script>
+        
+    </head>
+    <body ondragstart="return false;" ondrop="return false;" >
+	<div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>
+       <!--
+       <script>
+        window.onload = function () {
+          // Grab our canvas and setup the stage
+          const canvas = document.getElementById('canv');
+          const stage = new createjs.Stage(canvas);
+
+          console.log(canvas,stage)
+          // Create and place our text field on the canvas
+          const textField = new TextInput();
+          textField.y = textField.x = 100;
+          textField.placeHolder = "Input Field";
+          stage.addChild(textField);
+
+          // Updates the text field to the new internal data (ie. placeholder)
+          textField.update();
+
+          // Standard auto refresh
+          createjs.Ticker.on('tick', function () {
+            stage.update();
+          });
+        };
+      </script>
+      -->
+      <style>
+        body {
+          text-align: center;
+        }
+        canvas {
+          border: 1px solid #ddd;
+          box-shadow: 1px 1px 5px #ccc;
+        }
+      </style>
+        
+
+          <script>
+            $(document).ready(function(){
+
+
+
+                var coins = [
+                {coin:"demo",min_bet:1000,max_bet:100000000,fiche_kind:2,text_currency:"d",currency_tofixed:0},
+                {coin:"btc",min_bet:0.01,max_bet:10,fiche_kind:0,text_currency:"β",currency_tofixed:2},
+                {coin:"ltc",min_bet:0.1,max_bet:1000,fiche_kind:1,text_currency:"￡",currency_tofixed:1},
+                {coin:"doge",min_bet:1000,max_bet:10000000,fiche_kind:2,text_currency:"D",currency_tofixed:0}]
+               
+                    
+                     var oMain = new CMain({                                    
+                                    coins:coins,
+                                    lang:0,                       //设定语言，0:中文，1:English
+                                    win_occurrence: 40,          //WIN OCCURRENCE PERCENTAGE. VALUES BETWEEN 0-100
+                                    bet_occurrence:[             //IF PLAYER MUST WIN CURRENT HAND AND THERE ARE MULTIPLE BETS:
+                                                                 //WARNING: DON'T SET ANY OF THESE VALUES AT 100.
+                                                    20,          //OCCURRENCE FOR TIE BET
+                                                    30,          //OCCURRENCE FOR BANKER BET
+                                                    50           //OCCURRENCE FOR PLAYER BET
+                                                    ],
+                                    min_bet: coins[0].min_bet,                //MIN BET PLAYABLE BY USER. DEFAULT IS 0.1$
+                                    max_bet: coins[0].max_bet,                //MAX BET PLAYABLE BY USER. 
+                                    fiche_kind:coins[0].fiche_kind,
+                                    text_currency:coins[0].text_currency,
+                                    multiplier:[                 //MULTIPLIER FOR EACH BET
+                                                8,               //MULTIPLIER FOR TIE: PAYS 8 TO 1
+                                                1.95,            //MULTIPLIER FOR BANKER: PAYS 1.95 TO 1
+                                                2                //MULTIPLIER FOR PLAYER: PAYS 2 TO 1
+                                                ],
+                                    money: 10000000000,                  //STARING CREDIT FOR THE USER
+                                    game_cash: 1500,             //GAME CASH AVAILABLE WHEN GAME STARTS
+                                    time_show_hand: 2500,        //TIME (IN MILLISECONDS) SHOWING LAST HAND
+                                    //////////////////////////////////////////////////////////////////////////////////////////
+                                    ad_show_counter: 10           //NUMBER OF HANDS PLAYED BEFORE AD SHOWN
+                                    
+                                });
+
+
+					 
+                    $(oMain).on("recharge", function(evt) {
+                             alert("recharge");
+                    });
+                    
+                    $(oMain).on("start_session", function(evt) {
+                        if(getParamValue('ctl-arcade') === "true"){
+                            parent.__ctlArcadeStartSession();
+                        }
+                        //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+                    $(oMain).on("end_session", function(evt) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeEndSession();
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+
+                    $(oMain).on("save_score", function(evt,iMoney) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeSaveScore({score:iMoney});
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+                    $(oMain).on("show_interlevel_ad", function(evt) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeShowInterlevelAD();
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+                    $(oMain).on("share_event", function(evt, iScore) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeShareEvent({   img: TEXT_SHARE_IMAGE,
+                                                                title: TEXT_SHARE_TITLE,
+                                                                msg: TEXT_SHARE_MSG1 + iScore + TEXT_SHARE_MSG2,
+                                                                msg_share: TEXT_SHARE_SHARE1 + iScore + TEXT_SHARE_SHARE1});
+                           }
+                    });
+                    
+                    if (isIOS()) {
+                        setTimeout(function () {
+                            sizeHandler();
+                        }, 200);
+                    } else {
+                        sizeHandler();
+                    }
+           });
+
+        </script>
+        <canvas id="canvas" class='ani_hack' width="1700" height="768"> </canvas>
+        <!--
+        <canvas id="canv" class='ani_hack' width="1700" height="768"> </canvas>
+        -->
+		<div id="block_game" style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none"></div>
+    </body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<!--AUI样式框架-->
+		<link rel="stylesheet" type="text/css" href="../css/aui/aui.min.css" />
+		<!--拓展AUI字体图标-->
+		<link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+		<!--通用样式-->
+		<link rel="stylesheet" type="text/css" href="../css/winu-ui.css" />
+		<style type="text/css">
+			.unread {
+				display: inline-block;
+				background: #15b5e9;
+				color: #fff;
+				font-size: 10px;
+				padding: 0 3px;
+				border-radius: 10px;
+				-webkit-border-radius: 10px;
+			}
+			.menu_pic{
+				width:1700px;
+				height:765px;
+			}
+			
+		</style>
+	
+		
+
+		
+	</head>
+	<body>
+	    <script>
+	   	 apiready = function() {
+	    	//alert("menu")
+	    	$("#baccarat").on("tap", function() {
+	    	 _openWin("main_win", "./html/login_win.html");
+	    	/*
+					var frameName="baccarat/main_frm"
+					_fixStatusBar(id, function(headerPos) {
+					
+						_openFrame(frameName, "./game/" + frameName + ".html", {
+							x : 0,
+							y : headerPos.h,
+							h : api.winHeight - headerPos.h - footerOffset.h
+						});
+					});	    	
+	    	*/
+	    	
+	    	//_closeToWin("root");
+	    		
+	    		//_openWin("main_win", "./game/baccarat/main_win.html");
+	    	 	//_setPrefs(window.gameId, "baccarat", function() {
+				//		
+				//})  	  	
+	    	})
+	     }
+	    // 
+	    </script>
+		<div class="aui-content">
+
+		    <ul class="aui-list-view aui-grid-view">
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6"  id="baccarat">
+		            <img class="aui-img-object" src="../game/baccarat/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 百家乐
+		            </div>
+		        </li>
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object" src="../game/chicken/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 快乐鸡
+		            </div>
+		        </li>	
+		        
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object" src="../game/wheel/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 幸运轮
+		            </div>
+		        </li>
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object menu_pic" src="../game/chicken/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 快乐鸡
+		            </div>
+		        </li>		
+		        
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object" src="../game/roulette/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 轮盘
+		            </div>
+		        </li>
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object" src="../game/chicken/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 快乐鸡
+		            </div>
+		        </li>			        	        	        
+		    </ul>
+	    
+		    
+		</div>
+		<div class="aui-content ">
+		    <ul class="aui-grid-sixteen">
+		        <li class="aui-col-xs-4 aui-text-center">
+				   
+		            <span class="aui-iconfont aui-icon-pay aui-text-primary"></span>
+		            <p>栏目2</p>
+				    
+		        </li>
+		        <li class="aui-col-xs-4 aui-text-center">
+		            <span class="aui-iconfont aui-icon-pay aui-text-primary"></span>
+		            <p>栏目2</p>
+		        </li>	
+		        <li class="aui-col-xs-4 aui-text-center">
+		            <span class="aui-iconfont aui-icon-pay aui-text-primary"></span>
+		            <p>栏目3</p>
+		        </li>	
+		        
+		        <li class="aui-col-xs-4 aui-text-center">
+		            <span class="aui-iconfont aui-icon-pay aui-text-primary"></span>
+		            <p>栏目4</p>
+		        </li>
+		        <li class="aui-col-xs-4 aui-text-center">
+		            <span class="aui-iconfont aui-icon-pay aui-text-primary"></span>
+		            <p>栏目5</p>
+		        </li>	
+		        <li class="aui-col-xs-4 aui-text-center">
+		            <span class="aui-iconfont aui-icon-pay aui-text-primary"></span>
+		            <p>栏目6</p>
+		        </li>			        		        
+			        	        
+		    </ul>
+		</div>	
+	
+	
+
+	</body>
+	<!--APICloud自带前端脚本-->
+	<script type="text/javascript" src="../script/api.js"></script>
+	<!--Zepto.js,类似Jquery-->
+	<script type="text/javascript" src="../script/zepto.min.js"></script>
+	<!--doT.js模板引擎-->
+	<script type="text/javascript" src="../script/doT.min.js"></script>
+	<!--linq.js json操作框架-->
+	<script type="text/javascript" src="../script/linq.min.js"></script>
+	<!--通用脚本库-->
+	
+
+
+	<script type="text/javascript" src="../script/winu-base.js"></script>
+	
+</html>

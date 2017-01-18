@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<!--AUI样式框架-->
+		<link rel="stylesheet" type="text/css" href="./css/aui/aui-win.min.css" />
+		<!--拓展AUI字体图标-->
+		<link rel="stylesheet" type="text/css" href="./css/iconfont/iconfont.css" />
+		<!--通用样式-->
+		<link rel="stylesheet" type="text/css" href="./css/winu-ui.css" />
+		
+		
+		
+		
+		<style type="text/css">
+			/*设置图标变大*/
+			#aui-footer ul li span.aui-iconfont {
+				font-size: 25px;
+			}
+			.menu-item {
+				width:80%;
+				height:80%;
+			}
+			.mt10 {
+				margin-top:10px
+			}
+		</style>
+	</head>
+	<body>
+	
+	
+	
+	
+		<!--头部集合 BEGIN-->
+		<header class="aui-bar aui-bar-nav aui-bar-primary header" id="menu">
+			<a class="aui-pull-left"></a>
+			<div class="aui-title">
+				游戏选单
+			</div>
+
+					
+			<a class="aui-pull-right" onclick="_openWin('setting_win','./html/setting_win.html');"><span class="aui-iconfont iconfont icon-shezhi"></span></a>
+				
+		</header>
+		
+	
+
+		
+
+<p></p>		 
+<div class="aui-content">
+    <ul class="aui-grid-nine" id="gamelist">
+        <li class="aui-col-xs-4 aui-text-center mt10" data-id="fruit">
+            <img class="aui-img-object menu-item" src="./game/fruit/sprites/menu.jpg">
+            <div class="aui-img-body">               	 
+				水果盘
+            </div>       
+            
+        </li>    
+        <li class="aui-col-xs-4 aui-text-center mt10" data-id="chicken">
+            <img class="aui-img-object menu-item" src="./game/chicken/sprites/menu.jpg">
+            <div class="aui-img-body">               	 
+				快乐鸡
+            </div>       
+            
+        </li>  
+        <li class="aui-col-xs-4 aui-text-center mt10" data-id="crap">
+            <img class="aui-img-object menu-item" src="./game/crap/sprites/menu.jpg">
+            <div class="aui-img-body">               	 
+				
+				Crap
+            </div>       
+            
+        </li>  
+                
+              
+        <li class="aui-col-xs-4 aui-text-center mt10" data-id="baccarat">
+            <img class="aui-img-object menu-item" src="./game/baccarat/sprites/menu.jpg">
+            <div class="aui-img-body">
+               	 百家乐
+            </div>       
+            
+        </li>
+
+         <li class="aui-col-xs-4 aui-text-center mt10" data-id="roulette">
+            <img class="aui-img-object menu-item" src="./game/roulette/sprites/menu.jpg">
+            <div class="aui-img-body">
+               	 轮盘
+            </div>       
+            
+        </li> 
+         <li class="hide aui-col-xs-4 aui-text-center mt10" data-id="btcdice">
+            <img class="aui-img-object menu-item" src="./game/btcdice/sprites/menu.jpg">
+            <div class="aui-img-body">
+               	色子
+            </div>       
+            
+        </li>   
+                
+           
+               
+    </ul>
+</div>
+
+		
+		
+		
+		
+		
+		<header class="aui-bar aui-bar-nav aui-bar-primary header winu-display-none" id="contact">
+			<div class="aui-title">
+				游戏选单
+			</div>
+			<a class="aui-pull-right" onclick='selectAddType();';><span class="aui-iconfont iconfont icon-tianjia"></span></a>
+		</header>
+		<header class="aui-bar aui-bar-nav aui-bar-primary header winu-display-none" id="coin">
+			<div class="aui-title">
+				钱包
+			</div>
+			<a class="aui-pull-right" onclick='selectAddType();';><span class="aui-iconfont iconfont icon-tianjia"></span></a>
+		</header>		
+		
+		<header class="aui-bar aui-bar-nav aui-bar-primary header winu-display-none" id="qzone">
+			<a class="aui-pull-left"></a>
+			<div class="aui-title">
+			
+				动态
+			</div>
+		</header>
+		<!--头部集合 END-->
+		
+		
+		
+		
+		<!--底部导航 BEGIN-->
+		<footer class="aui-nav" id="aui-footer">
+			<ul class="aui-bar-tab">
+				<li class="active-warning" data-id="msg" >
+					<span class="aui-iconfont iconfont icon-xiaoxi"></span>
+					<p>
+						消息
+					</p>
+				</li>
+				<li data-id="contact" >
+					<span class="aui-iconfont iconfont icon-iconfonttuandui"></span>
+					<p>
+						通讯录
+					</p>
+				</li>
+				<li data-id="coin" >
+					<span class="aui-iconfont iconfont icon-kongjian"></span>
+					<p>
+						钱包
+					</p>
+				</li>				
+				<li data-id="qzone">
+					<span class="aui-iconfont iconfont icon-kongjian"></span>
+					<p>
+						动态
+					</p>
+				</li>
+				
+			</ul>
+		</footer>
+		<!--底部导航 END-->
+	</body>
+	<!--APICloud自带前端脚本-->
+	<script type="text/javascript" src="./script/api.js"></script>
+	<!--Zepto.js,类似Jquery-->
+	<script type="text/javascript" src="./script/zepto.min.js"></script>
+	<!--通用脚本库-->
+	<script type="text/javascript" src="./script/winu-base.js"></script>
+	<script type="text/javascript">
+		
+		apiready = function() {
+				 api.setScreenOrientation({
+                                orientation : 'landscape_right'
+                       
+                       
+                        });	
+	  
+	    	//alert("menu")
+	    	$("#gamelist").on("tap","li", function() {
+				var $that = $(this);
+				// 3、获取点击的索引和id和frame名称
+				var index = $that.index();
+				var id = $that.attr("data-id");
+				//var frameName = id + "_frm";	    	
+	    		//console.log($that,index,id)
+	    		if (id){
+	    			_openWin("main_win", "./game/"+id+"/main_win.html");	  	
+	    		}
+	    	 
+	    	})
+	     		
+		
+			
+			footerOffset = $api.offset($api.byId("aui-footer"));
+			_fixStatusBar("menu", function(headerPos) {
+			});
+			// 12、
+			
+			
+			_twoClickCloseApp();
+		};
+	</script>
+</html>

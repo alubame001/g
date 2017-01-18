@@ -1,0 +1,400 @@
+error {
+    border: 2px solid red;
+}
+.nopadding {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+/* dice index */
+ div#topnav {
+    height: 50px;
+    box-shadow: 0px -1px 1px #666 inset;
+    color: #FFF;
+    font-size: 18px;
+    background-image: url('/v2.1/images/pattern.png');
+}
+div#topnav > div.content {
+    width: 950px;
+    margin: 0 auto;
+}
+div#topnav > div.content > .nav {
+    padding-top: 6px;
+}
+.nav>li>a {
+    /*padding: 5px 10px;*/
+    color: #FFF;
+}
+.nav a:hover, .nav a:focus {
+    color: #428BCA;
+}
+.dropdown-menu {
+    min-width: 100px;
+}
+/***** topbind ******/
+ div#topbind {
+    height: 92px;
+    /*width: 100%;*/
+    background: #CCC;
+    box-shadow: 0px -1px 2px #CCC;
+    color: #000;
+    background: url('/v2.1/images/background_image.jpg') no-repeat;
+    background-position: 50% 0%;
+}
+div#topbind > div.content {
+    width: 950px;
+    margin: 0 auto;
+}
+.bindtop{
+    top: 0px;
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+}
+.placeholder{
+    margin-bottom: 92px;
+}
+#max_profit {
+    font-size: 26px;
+}
+.divset {
+    height: 92px;
+    overflow: hidden;
+    text-align: left;
+}
+.inline {
+    display: inline-block;
+}
+.divset div.big {
+    font-size: 16px
+}
+.nodisplay {
+    display: none
+}
+.divset div.small {
+    font-size: 15px
+}
+.divset div.small .stattitle {
+    font-size: 16px
+}
+.stattitle {
+    color: #777
+}
+#pct_balance {
+    font-size: 26px;
+    font-weight: bold;
+    width: 220px;
+    text-align: left;
+    vertical-align: baseline;
+    color: #3A3;
+}
+.masked {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: url('/v2.1/images/slideglare.png'), #3A3;
+    background-repeat: no-repeat;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-animation-name: masked-animation;
+    -webkit-animation-duration: 15s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+/**************** betoptions ************/
+.betoptions{
+    width: 950px;
+    margin: 10px auto 0px auto;
+}
+.betoptions > .play_mode{
+    width: 200px;
+    border-bottom: 0px solid transparent;
+    margin: 0px auto 0px auto;
+}
+.betoptions > .play_mode > li {
+    width: 100px;
+}
+.betoptions > .play_mode > li > a{
+    color: #000000;
+    background-color: #DDD;
+    margin: 0px;
+    border: 0px solid transparent;
+    border-radius: 0px 0px 0px 0px;
+}
+.betoptions > .play_mode >li:first-child >a{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.betoptions > .play_mode >li:last-child >a{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.betoptions > .play_mode >li > a:hover,
+.betoptions > .play_mode >li.active > a{
+    border: 0px solid red;
+    background-color: #eeeeee !important;
+}
+/************* betoption manual *****************/
+.manual {
+    width: 800px;
+    margin: 0px auto 0px auto;
+    padding-top: 36px;
+    text-align: left;
+}
+.manual .option label:first-child{
+    width: 100px;
+    font-size: 20px;
+    font-weight: normal;
+    text-align: right;
+}
+.manual .option label:last-child {
+    width: 30px;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+}
+.manual .option button{
+    height: 30px;
+    width: 32px;
+    color: #000000;
+    background: #FFFFFF;
+    border: none;
+    outline: none;
+    vertical-align: top;
+}
+.manual .option button:hover{
+    background: #dddddd;
+}
+.manual .option input{
+    width: 130px;
+    height: 30px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+}
+.manual .betops {
+    margin: 0px auto 0px auto;
+    text-align: center;
+}
+.manual .betops .play.btn {
+    padding: 8px 20px;
+    font-size: 18px;
+    margin: 10px;
+}
+/************* betoption autobet *****************/
+.autobet{
+    width: 600px;
+    margin: 0px auto 0px auto;
+    padding-top: 36px;
+    text-align: left;
+}
+.autobet .option{
+    width: 300px;
+}
+.autobet .option label:first-child {
+    width: 100px;
+    font-size: 18px;
+    font-weight: normal;
+    text-align: right;
+}
+.autobet .option label:last-child,
+.autobet .optionfull label:last-child {
+    width: 30px;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+}
+.autobet .optionfull{
+    /*width: 800px;*/
+    margin: 10px auto;
+    text-align: center;
+}
+.autobet .optionfull label:first-child {
+    font-size: 18px;
+    font-weight: normal;
+    text-align: right;
+    white-space:nowrap;
+}
+.autobet .optionfull select,
+.autobet .optionfull input{
+    height: 30px;
+}
+
+/************* betoption follow *****************/
+.follow{
+    padding-top: 36px;
+}
+
+div#topnav div.wrapper, div#topbind div.wrapper, div#main {
+    width: 950px;
+    margin: 0 auto;
+}
+.divset {
+    height: 92px;
+    overflow: hidden;
+}
+.inline {
+    display: inline-block;
+}
+div.main {
+    width: 950px;
+    margin: 0 auto;
+}
+.wag {
+    width: 400px;
+    display: inline-block;
+}
+.wag .llabel {
+    font-size: 20px;
+    width: 110px;
+    text-align: right;
+    display: inline-block;
+}
+.wag .rlabel {
+    font-size: 20px;
+    width: 40px;
+    text-align: left;
+    display: inline-block;
+}
+.wagcontrol {
+    color: #000;
+    background: #FFFFFF;
+    position: relative;
+    bottom: 1px;
+    height: 31px;
+    padding: 0 5px;
+    width: 25px;
+    font-size: 16px;
+    border: none;
+    -webkit-transition: 0.2s all;
+    -moz-transition: 0.2s all;
+    -transition: 0.2s all;
+}
+.button_inner_group {
+    display: inline-block;
+}
+.tabbar .btn.active {
+    color: #111;
+    text-shadow: none;
+    font-weight: bold;
+}
+.panel, .results_container {
+    background: rgba(255, 255, 255, 0.6);
+}
+/**********************/
+.tabbar{
+    border-bottom: 0px; 
+}
+.tabbar > li{
+    margin-bottom: 0px;
+    min-width: 80px;
+}
+.tabbar > li > a{
+    margin: 0px 10px 0px 0px;
+    font-size:16px;
+    text-align: center;
+    border: 0px solid #ffffff !important;
+}
+.tabbar > li > a:hover{
+    background:rgba(255, 255, 255, 0.2) !important;
+    color:#FFF;
+}
+.tabbar > li.active > a,
+.tabbar > li.active > a:hover,
+.tabbar > li.active > a:focus {
+    background:rgba(255, 255, 255, 0.6) !important;
+    color: #111;
+    font-weight: bold;
+}
+
+/********** betroll **********/
+#betroll, #chat, #mybet, #stats, #theory, #account, #invest, #help {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+#betroll > .results_header{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/********* chatroom *********/
+.chatscroll {
+    border: 1px solid black;
+    background: white;
+    overflow-y: scroll;
+    height: 320px;
+    text-align: left;
+    margin: 30px 30px 20px 30px;
+    padding: 10px;
+    line-height: 1;
+}
+
+.chatinput {
+    border: 1px solid black;
+    text-align: left;
+    width: 830px;padding:6px 14px
+}
+
+/********* stats ************/
+.statspanel {
+    text-align: left;
+    width: 400px;
+}
+.statspanel h2 {
+    padding-left: 35px;
+}
+.statspanel .slabel {
+    float: left;
+    padding: 0px 5px 5px 0;
+    font-size: 130%;
+    text-align: right;
+    width: 100px;
+}
+.statspanel span {
+    font-family: monospace;
+    padding: 2px 4px;
+    margin: 2px;
+    font-weight: bold;
+    background: rgba(223, 245, 244, 0.43);
+    border: 1px dashed #FFF;
+    border-radius: 12px;
+}
+/********* theory ********/
+/*.theory {
+    padding: 10px 20px;
+    line-height: 1.5em;
+}*/
+#theory .monospace {
+    font-size: 90%;
+    font-weight: bold;
+    /* width: 64ex; */
+    /* background: #ccc; */
+    padding: 3px;
+    display: inline-block;
+    font-family: monospace;
+    border-radius: 12px;
+}
+#theory span {
+    font-family: monospace;
+    padding: 2px 4px;
+    margin: 2px;
+    font-weight: bold;
+    background: rgba(223, 245, 244, 0.43);
+    border: 1px dashed #FFF;
+    border-radius: 12px;
+}
+/********* account ********/
+/*.theory {
+    padding: 10px 20px;
+    line-height: 1.5em;
+}*/
+
+/******** common *********/
+.number{
+    font-family: monospace;
+    padding: 2px 4px;
+    margin: 2px;
+    font-weight: bold;
+    background: rgba(223, 245, 244, 0.43);
+    border: 1px dashed #FFF;
+    border-radius: 12px;
+}

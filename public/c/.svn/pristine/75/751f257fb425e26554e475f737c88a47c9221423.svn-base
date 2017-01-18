@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<!--AUI样式框架-->
+		<link rel="stylesheet" type="text/css" href="../css/aui/aui.min.css" />
+		<!--拓展AUI字体图标-->
+		<link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+		<!--通用样式-->
+		<link rel="stylesheet" type="text/css" href="../css/winu-ui.css" />
+		<style type="text/css">
+			body {
+				padding-top: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="aui-content aui-card" id="frm">
+			<div class="aui-form">
+				<div class="aui-input-row winu-clear-both winu-min-height winu-width-100">
+					<i class="aui-input-addon aui-iconfont aui-icon-lock aui-text-info"></i>
+					<input type="password" class="aui-input"  id="password1"placeholder="请输入密码(8至16位)" name="password1" data-rule="*8-16" data-nullmsg="请输入密码" data-errmsg="密码格式不正确" />
+				</div>
+				<div class="aui-input-row  winu-clear-both winu-min-height winu-width-100">
+					<i class="aui-input-addon aui-iconfont aui-icon-lock aui-text-warning"></i>
+					<input type="password" id="password2" class="aui-input" placeholder="请再次输入密码" name="password2" data-rule="*8-16" data-nullmsg="请再次输入密码" data-errmsg="密码格式不正确"/>
+				</div>
+				<!--
+				<div class="aui-input-row  winu-clear-both winu-min-height winu-width-100">
+					
+					<input  id="remember" class="aui-checkbox"  name="remember" data-rule="*" />
+				</div>
+				-->				
+				<div class="aui-btn-row  winu-clear-both winu-min-height winu-width-100">
+					<div class="aui-btn aui-btn-block aui-btn-warning" id="btn">
+						设定
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!--APICloud自带前端脚本-->
+	<script type="text/javascript" src="../script/api.js"></script>
+	<!--Zepto.js,类似Jquery-->
+	<script type="text/javascript" src="../script/zepto.min.js"></script>
+	<!--通用脚本库-->
+	<script type="text/javascript" src="../script/winu-base.js"></script>
+	<!--表单验证-->
+	<script type="text/javascript" src="../script/availdate-v1.0.2.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+	
+			ac.form({
+				area : "#frm",
+				btn : "#btn",
+				startCheck : function() {
+				    //alert($('#password1').val())
+
+				 
+				},
+				singleError : function(e, msg) {
+					_toast(msg);
+				},
+				endSuccess : function(data) {
+						if ($('#password1').val() != $('#password2').val()){
+							_toast("前後密码不相同");
+						}else {
+						console.log(JSON.stringify(data));
+						
+							//_setPrefs(window.coinKey, $('#password1').val(), function() {
+							_setPrefs(window.coinKey, data.password1, function() {
+								// 存储token到本地存储中
+								//_sendEvent("coinKeyUpdated", "");
+								_openWin("coin_choose_address", "coin_choose_address_win.html");
+								// 回到首页
+								//_closeToWin("root");
+							});		
+											
+	
+
+
+						}	
+							
+
+				}
+			});
+		};
+	</script>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<!--AUI样式框架-->
+		<link rel="stylesheet" type="text/css" href="../css/aui/aui.min.css" />
+		<!--拓展AUI字体图标-->
+		<link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+		<!--通用样式-->
+		<link rel="stylesheet" type="text/css" href="../css/winu-ui.css" />
+		<style type="text/css"></style>
+	</head>
+	<body>
+<div class="aui-content">
+
+		    <ul class="aui-list-view aui-grid-view">
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6"  id="baccarat">
+		            <img class="aui-img-object" src="../game/baccarat/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 百家乐
+		            </div>
+		        </li>
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object" src="../game/chicken/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 快乐鸡
+		            </div>
+		        </li>	
+		        
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object" src="../game/wheel/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 幸运轮
+		            </div>
+		        </li>
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object menu_pic" src="../game/chicken/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 快乐鸡
+		            </div>
+		        </li>		
+		        
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object" src="../game/roulette/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 轮盘
+		            </div>
+		        </li>
+		        <li class="aui-list-view-cell aui-img aui-col-xs-6">
+		            <img class="aui-img-object" src="../game/chicken/sprites/menu.jpg">
+		            <div class="aui-img-body">
+		               	 快乐鸡
+		            </div>
+		        </li>			        	        	        
+		    </ul>
+	    
+		    
+		</div>
+	</body>
+	<!--APICloud自带前端脚本-->
+	<script type="text/javascript" src="../script/api.js"></script>
+	<!--Zepto.js,类似Jquery-->
+	<script type="text/javascript" src="../script/zepto.min.js"></script>
+	<!--通用脚本库-->
+	<script type="text/javascript" src="../script/winu-base.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+	    	$("#baccarat").on("tap", function() {
+	    	_closeToWin("root");
+	    		//_openFrame("main_win", "./game/baccarat/main_frm.html");
+	    	 	//_setPrefs(window.gameId, "baccarat", function() {
+				//		
+				//})  	  	
+	    	})		
+		
+		};
+	</script>
+</html>

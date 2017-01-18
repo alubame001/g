@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<!--AUI样式框架-->
+		<link rel="stylesheet" type="text/css" href="../css/aui/aui.min.css" />
+		<!--拓展AUI字体图标-->
+		<link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+		<!--通用样式-->
+		<link rel="stylesheet" type="text/css" href="../css/winu-ui.css" />
+		<style type="text/css">
+			body {
+				padding-top: 15px;
+			}
+		</style>
+	</head>
+	<body>
+	
+	
+
+	
+    
+		<div class="aui-card" id="frm">       
+		    <div class="aui-form">
+		        <div class="aui-input-row">
+		            <span class="aui-input-addon">机率</span>				        	            
+		            <div class="aui-range" style="margin-left:60px;">
+		                 <input type="range" class="aui-range-primary" value="30" max="99" min="1" step="1" id="chance" />
+		            </div>
+		            <span class="aui-input-addon" id="chance_label" ></span>
+		            
+		        </div>  
+		        
+		        <div class="aui-input-row">
+		            <span class="aui-input-addon">赔率</span>				        	            
+		            <div class="aui-range" style="margin-left:60px;">
+		                 <input type="range" class="aui-range-primary" value="30" max="99" min="1" step="1" id="odd" />
+		            </div>
+		            <span class="aui-input-addon" id="odd_label" ></span>
+		            
+		        </div>    		          
+		    
+
+		        <div class="aui-input-row aui-success">
+		            <label class="aui-input-addon">金额</label>
+		            <input style="margin-left:60px;" type="text" id="bet" class="aui-input" value="1" data-rule="num" data-nullmsg="不能为空" data-errmsg="请输入数字" data-haved="true"/>
+		            <i class="aui-input-addon aui-iconfont aui-icon-roundcheckfill"></i>
+		        </div>
+
+		        <div class="aui-input-row aui-success">
+		            <label class="aui-input-addon">盈利</label>
+		            <input style="margin-left:60px;" type="text" id="profit" class="aui-input" value="0" data-rule="num" data-nullmsg="不能为空" data-errmsg="请输入数字" data-haved="true"/>
+		            <i class="aui-input-addon aui-iconfont aui-icon-roundcheckfill"></i>
+		        </div>
+		
+		        <div class="aui-btn-row">
+		            <div class="aui-btn aui-btn-success"  id="hi">大</div>&nbsp;&nbsp;
+		            <div class="aui-btn aui-btn-warning"  id="lo">小</div>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="aui-card">	
+			<div class="aui-content">
+	
+			
+				<div class="aui-flex-col aui-flex-center aui-border-tb">
+				    <div class="aui-flex-item-12 aui-flex-row aui-flex-middle aui-padded-10">
+				        <h3 class="aui-text-danger">-1000 DOGE</h3>
+				        <p>12346,12/16 15:38,36.77,>50,1000 DOGE</p>
+				        
+				         <h3 class="aui-text-success">2000 DOGE</h3>
+				         <p>12345,12/16 15:37,36.77,>50,1000 DOGE</p>      
+				    </div>
+				    
+				    
+				</div>	
+				    
+						
+
+			</div>
+		</div>	
+		
+	
+		
+		
+	</body>
+	<!--APICloud自带前端脚本-->
+	<script type="text/javascript" src="../script/api.js"></script>
+	<!--Zepto.js,类似Jquery-->
+	<script type="text/javascript" src="../script/zepto.min.js"></script>
+	<!--通用脚本库-->
+	<script type="text/javascript" src="../script/winu-base.js"></script>
+	<!--表单验证-->
+	<script type="text/javascript" src="../script/availdate-v1.0.2.js"></script>
+	<script type="text/javascript" src="../script/aui-range.js" ></script>
+	<script type="text/javascript">
+		
+		$aui.range($api.byId("chance"),function(ret){
+		    $api.text($api.byId("chance_label"),ret+" %");
+		    var v = 99/ret 
+		    v = round_down(v)
+		    $api.text($api.byId("odd_label"),v);
+		    var x= toInt(v)
+		    $api.byId("odd").value=x		    
+			$api.byId("profit").value=calc_profit( $api.byId("bet").value,v)     
+		})	
+		$aui.range($api.byId("odd"),function(ret){
+		    $api.text($api.byId("odd_label"),ret);
+		    var v = 99/ret
+		    v = round_down(v)
+		    $api.text($api.byId("chance_label"),v+" %");		    
+		    
+		    var x= toInt(v)
+		    $api.byId("chance").value=x
+		    
+		    $api.byId("profit").value=calc_profit( $api.byId("bet").value,ret)    
+		   
+		})	
+		function format_chance(chance){
+		    chance=chance.toFixed(0);
+		    chance="00000".substring(0,6-chance.length)+chance;
+		    return chance.substring(0,2)+"."+chance.substring(2,4)+" "+chance.substring(4,6)
+		}		
+		function round_down(num){
+   			 return Math.floor(num*1e8+1e-6)/1e8
+		}		
+		function toInt(num){
+   			 return num.toFixed(0)
+		}
+		function calc_profit(bet,odd){
+			
+			odd = odd -1
+			
+			var profit= bet * odd
+		    profit = round_down(profit)
+		    return profit
+		}		
+		
+	</script>
+
+	
+	
+	<script type="text/javascript">
+		apiready = function() {
+		
+			ac.form({
+				area : "#frm",
+				btn : "#hi",
+				startCheck : function() {
+					_toast("大");
+				},
+				singleError : function(e, msg) {
+					_toast(msg);
+				},
+				endSuccess : function(data) {
+					// 显示加载
+					//_showProgress();
+					//_toast(window.serverUrl);
+					
+				}
+			});
+			ac.form({
+				area : "#frm",
+				btn : "#lo",
+				startCheck : function() {
+					_toast("小");
+				},
+				singleError : function(e, msg) {
+					_toast(msg);
+				},
+				endSuccess : function(data) {
+					// 显示加载
+					//_showProgress();
+					//_toast(window.serverUrl);
+					
+				}
+			});	
+			
+			
+								
+		};
+	</script>
+</html>

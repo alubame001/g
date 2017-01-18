@@ -1,0 +1,1249 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>BtcDice.com - 在线比特币骰子游戏</title>
+    <meta name="description" content="比特币骰子游戏 - 99% 超高返奖率 - 实时聊天 - 投注可获股票 - 可当玩家也可当庄家 - 投注结果可数学验证 - 绝对公平">
+    
+    <!--<link rel="stylesheet" href="/stylesheets/dice.css">
+    <link href="stylesheets/index.css" rel="stylesheet" type="text/css" />!-->
+
+    <link rel="icon" type="image/png" href="images/btc-dice.png">
+
+    
+    
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script type="text/javascript">
+        var config = {
+            coinunit : 'DOGE',
+            bet : {
+                minimal :  0.00000001
+            }
+        };
+        var _gConfig = {"domains":["btc-dice.com","bdm2.com","jsbdw.com","91dice.com","btcdice.com","btcdice1.com"],"captchaUrl":"http://127.0.0.1:3001/captcha","hostname":"doge.btc-dice.com","icon":"images/DOGE.png","coinunit":"DOGE","cointype":"DOGE","links":{"tx":"http://dogechain.info/tx/","address":"http://dogechain.info/chain/Dogecoin/address/"}};
+    </script>
+    <script src="./js/socket.io.js" style="color: rgb(0, 0, 0);"></script>
+
+    <script src="./js/main.js" type="text/javascript"></script>
+     
+
+    
+
+    
+</head>
+<body>
+
+
+<div id="topnav">
+    <div class="wrapper">
+        <img style="float:left;width:50px;height:50px;" class="logo" src="images/DOGE.png" />
+
+        <img style="float:left;" class="logo" src="images/bd_grey.png" />
+         
+        <div id="navright">
+            <ul class="nav nav-pills">
+                <li class="dropdown">
+                    <a class="dropdown-toggle " data-toggle="dropdown" href="javascript:void(0);"><i class="pointer"></i><LANGS  id="L6">帐户</LANGS>&nbsp;<small>:&nbsp;&nbsp;<!--<span id="nickhdr" style="width:30px;white-space: nowrap;text-overflow:ellipsis;">MIB</span>-->16436</small><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a href="#" id="a_random"><LANGS  id="L10">换手气</LANGS></a>
+                        </li>        
+                        <li>
+                            <a href="javascript:void(0);" id="referlink"><LANGS  id="L400">我的推广网址</LANGS></a>
+                        </li>
+                        <li>
+                            <a href="/v3.1/stats#/stats/rebate" target="_blank"><LANGS  id="L401">查询返利</LANGS></a>
+                        </li>        
+                        <li>
+                            <a id="logout112" href="/user/logout"><LANGS  id="L14">登出</LANGS></a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=6b8d9d177a7a1036e6a345cc700fd81056bbc77594b91eaddf97e0ebe0a2d135">
+                        <img border="0" src="images/group.png" alt="BTC-DICE" title="官方QQ群">
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"href="javascript:void(0);"><LANGS  id="L15">切换币种</LANGS></a>
+                    <ul class="dropdown-menu"><li><a class="sublinks" href="http://btc.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">BTC</a></li>
+                        <li><a class="sublinks" href="http://ltc.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">LTC</a></li>
+                        <li><a class="sublinks" href="http://doge.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">DOGE</a></li>
+                        <li><a class="sublinks" href="http://ybc.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">YBC</a></li>
+                        <li><a class="sublinks" href="http://spc.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">SPC</a></li>
+                        <li><a class="sublinks" href="http://bgc.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">BGC</a></li>
+                        <li><a class="sublinks" href="http://ant.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">ATC</a></li>
+                        <li><a class="sublinks" href="http://lps.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">LPS</a></li>
+                        <li><a class="sublinks" href="http://lisk.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">LSK</a></li>
+                        <li><a class="sublinks" href="http://rio.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">RIO</a></li>
+                        <li><a class="sublinks" href="http://zcash.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1">ZCASH</a></li>
+                        <li><a href="http://doge.btcdice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1"><LANGS id="L3002">线路1</LANGS>:&nbsp;btcdice.com</a></li>
+                        <li><a href="http://doge.btcdice1.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1"><LANGS id="L3003">线路2</LANGS>:&nbsp;btcdice1.com</a></li>
+                        <!-- <li><a href="http://doge.btc-dice.com/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1"><LANGS id="L3004">线路3</LANGS>:&nbsp;btc-dice.com</a></li> -->
+                        <!--<li><a href="http://doge.bdm2.com:9087/user/login/usekey?key=ded2214fcd59d49b2f5c2bba1a5a867db8e8dee94068054807d54cc405a38ffcd64fb8736680239db29f60182e2a4b50913f29aa9ba5978c1fffec65b9081a0ae85134d6422d22d66eaeae07e46338c3ec9e806277a01b844fb2588a173ced6808ea9d3b61edc8396df56b368e1dd27d1a827f448467b70ee98d04e56721b5f1"><LANGS id="L3001">备用线路</LANGS>:&nbsp;bdm2.com</a></li>-->
+                    </ul>
+                </li>
+                <li>
+                   <a href="/reports/bet/summary"><LANGS  id="L16">排行榜</LANGS></a>
+                    
+                <!--    <a href="./reports/bet/summary" onclick="javascript:void window.open('/reports/bet/summary','','width=700,height=500,toolbar=0,menubar=0,location=1,status=1,scrollbars=0,resizable=0,left=0,top=0');return false;"><LANGS  id="L16">查询</LANGS></a></a>-->
+                </li>
+                <li>
+                    <a href="#" id="a_deposit"> <LANGS  id="L17">充值</LANGS></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" id="a_withdraw">  <LANGS  id="L18">提款</LANGS></a>
+                </li>
+                <!--
+                <li>
+                    <a href="javascript:startguide(&#39;zh&#39;);"> <LANGS  id="L9">帮助</LANGS></a>
+                </li>
+                -->
+                <li> <img style="float:center;" onclick="clickChange(1)"; class="logo" src="images/chs.jpg"/>
+                </li>
+                <li> <img style="float:center;" onclick="clickChange(2)"; class="logo" src="images/en.jpg"/>
+                </li>
+            </ul>
+            
+        </div>
+
+    </div>
+</div>
+
+<div id="affixplaceholder" class="hide"></div>
+<div id="topbind" class="">
+    <div class="wrapper">
+        <div class="balance divset inline">
+            <div class="bal_text big" style="padding-top:18px;">
+                <span class="stattitle"><LANGS  id="L19">我的余额</LANGS></span>
+                <a id="baldepbtn" onclick="$(&#39;#a_deposit&#39;).click()"><LANGS  id="L17">存款</LANGS></a>
+            </div>
+            <div id="pct_balance">loading</div>
+        </div>
+        <div class="divset inline">
+            <div class="bal_text small">
+                <span class="stattitle"><LANGS  id="L20">已下注</LANGS></span>
+                <br>
+                <span class="wagered">0.00000000</span>
+            </div>
+            <div class="bal_text small">
+                <span class="stattitle"><LANGS  id="L21">下注盈利</LANGS></span>
+                <br>
+                <span class="myprofit">0.00000000</span>
+            </div>
+        </div>
+        <div class="divset inline" style="overflow-x:visible;margin-left:20px;">
+            <div class="bal_text small">
+                <span class="stattitle"><LANGS  id="L22">下注次数</LANGS></span>
+                <br>
+                <span class="bets">0</span>
+            </div>
+            <div class="bal_text small">
+                <span class="stattitle"><LANGS  id="L23">输/赢 次数</LANGS></span>
+                <br>
+                <span style="color: rgb(189, 29, 29); background-color: transparent;" id="losses" class="losses">0</span>
+                <span class="slash">/</span>
+                <span style="color: rgb(0, 128, 0); background-color: transparent;" id="wins" class="wins">0</span>
+            </div>
+        </div>
+        <div class="divset inline" style="margin-left:20px;">
+            <div class="bal_text small">
+                <span class="stattitle"><LANGS  id="L24">我的投资</LANGS></span>
+                <br>
+                <span class="investment">0.00000000</span>
+            </div>
+            <div class="bal_text small">
+                <span class="stattitle"><LANGS  id="L25">我的投资盈利</LANGS></span>
+                <br>
+                <span class="invest_pft">0.00000000</span>
+            </div>
+        </div>
+        <div class="divset inline" style="margin-left:20px;">
+            <div class="bal_text small">
+                <span class="stattitle"><LANGS  id="L26">庄家资金</LANGS></span>
+                <br>
+                <span class="bankroll">0.00000000</span>
+            </div>
+            <div class="bal_text small">
+                <span class="stattitle" title="已扣除分红"><LANGS  id="L27">庄家盈利</LANGS></span>
+                <br>
+                <span class="sprofitraw">0.00000000</span>
+            </div>
+        </div>
+        <div class="divset inline right mpbox">
+            <div class="bal_text big" style="padding-top:18px;">
+                <span class="stattitle"><LANGS  id="L28">单注最大盈利</LANGS></span>
+            </div>
+            <div id="max_profit">0.00</div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="wrapper main"><br />
+<center>
+    
+<div id="betoptions" class="" >
+    <div class="btn-group play-mode" data-toggle="buttons-radio" style="display:block;">
+        <button class="btn active" data-toggle="tab" data-target="#manual"><LANGS id="L29">手动</LANGS></button>
+        <button class="btn" data-toggle="tab" data-target="#auto" onclick="betbotupdate()"><LANGS id="L30">自动</LANGS></button>
+        <!--<button class="btn" data-toggle="tab" data-target="#follow" onclick="followbotupdate()">跟投</button>-->
+    </div>
+
+    <div class="tab-content betting" style="background:rgba(255,255,255,0.6);border-radius:5px;margin-top:18px;">
+        <div class="tab-pane fade active in" id="manual">
+            <br>
+            <!--[if IE]>
+            <br>
+            <![endif]-->
+            <fieldset style="width:100%;display:block">
+                <div class="row wag">
+                    <div class="llabel"><LANGS id="L31">获胜机率：</LANGS></div>
+                    <button class="wagcontrol" onclick="clicked_chance_min()" title="(A)">
+                        <img src="images/bkd.png" width="14"></button>
+                    <button class="wagcontrol" onclick="clicked_chance_minus()" title="(S)">-</button>
+                    <input id="pct_chance" class="wagerset" tabindex="1" value="loading...">
+                    <button class="wagcontrol" onclick="clicked_chance_plus()" title="(D)">+</button>
+                    <button class="wagcontrol" onclick="clicked_chance_max()" title="(F)">
+                        <img src="images/fwd.png" width="14"></button>
+                    <div class="rlabel">%</div>
+                </div>
+                <div class="row wag">
+                    <div class="llabel"><LANGS id="L32">赔率：</LANGS></div>
+                    <input class="wagerset" id="pct_payout" tabindex="3" value="loading...">
+                    <div class="rlabel"><LANGS id="L3000">X</LANGS></div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row wag">
+                    <div class="llabel"><LANGS id="L33">投注金额：</LANGS></div>
+                    <button class="wagcontrol fffix" title="(Z)" onclick="clicked_bet_min()">
+                        <img src="images/bkd.png" width="14"></button>
+                    <button title="(X)" class="wagcontrol fffix" onclick="clicked_bet_half()">½</button>
+                    <input id="pct_bet" class="wagerset" tabindex="2" value="0">
+                    <button title="(C)" class="wagcontrol fffix" onclick="clicked_bet_double()">
+                        <img src="images/double.png" width="14"></button>
+                    <button class="wagcontrol fffix" title="" onclick="clicked_bet_max()">
+                        <img src="images/fwd.png" width="14"></button>
+                    <div class="rlabel">DOGE</div>
+                </div>
+                <div class="row wag">
+                    <div class="llabel"><LANGS id="L34">盈利：</LANGS></div>
+                    <input class="wagerset" id="pct_profit" tabindex="4" value="loading...">
+                    <div class="rlabel">DOGE</div>
+                </div>
+            </fieldset>
+
+            <div class="play-actions text-center button_group button_group" id="bet_buttons">
+                <div id="msg" style="position: absolute; width: 200px; height: 50px; padding-top: 10px; float: left;"></div>
+                <div class="button_inner_group">
+                    <button class="btn btn-large btn-primary play" id="a_hi">
+                        <LANGS id="L35">押</LANGS>
+                        <span style="border-bottom:1px dotted #6F32B1" title="(H)"><LANGS id="L36">大</LANGS></span>
+                        <div id="hi" class="target">&gt; 14.99 99</div>
+                    </button>
+                </div>
+                <div class="button_inner_group">
+                    <button class="btn btn-large btn-primary play" id="a_lo">
+                        <LANGS id="L35">押</LANGS>
+                        <span style="border-bottom:1px dotted #6F32B1" title="(L)"><LANGS id="L37">小</LANGS></span>
+                        <div id="lo" class="target">&lt; 85.00 00</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- /manual -->
+
+        <div class="tab-pane fade" id="auto">
+            <br>
+            <!--[if IE]>
+            <br>
+            <![endif]-->
+
+            <fieldset style="width:100%;">
+                <div class="row wag">
+                    <div class="llabel"> <LANGS id="L31">机率：</LANGS></div>
+
+                    <input id="bot_chance" class="wagerset" tabindex="1" onchange="betbotupdate()" onkeyup="if($(this).val()&gt;98){$(this).val(98)}if($(this).val()&lt;0.00001){$(this).val(0.00001)}$(&#39;#bot_payout&#39;).val((0.99/(parseFloat($(this).val()/100))).toFixed(8));betbotupdate()" value="50">
+                    <div class="rlabel">%</div>
+                </div>
+                <div class="row wag">
+                    <div class="llabel"> <LANGS id="L32">赔率：</LANGS></div>
+                    <input onchange="betbotupdate()" onkeyup="if($(this).val()&gt;990000){$(this).val(990000)}if($(this).val()&lt;1.01020408){$(this).val(1.01020408)}$(&#39;#bot_chance&#39;).val((0.99/(parseFloat($(this).val()/100))).toFixed(8));betbotupdate()" class="wagerset" id="bot_payout" tabindex="3" value="1.98">
+                    <div class="rlabel">x</div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row wag">
+                    <div class="llabel"> <LANGS id="L20">投注金额：</LANGS></div>
+                    <input id="bot_bet" class="wagerset" tabindex="2" onchange="betbotupdate()" onkeyup="if((parseFloat($(this).val()))&gt;parseFloat($(&#39;#pct_balance&#39;).text())){$(this).val($(&#39;#pct_balance&#39;).text());} if(($(this).val()*$(&#39;#bot_payout&#39;).val())&gt;$(&#39;#max_profit&#39;).text()){$(this).val($(&#39;#max_profit&#39;).val())} betbotupdate()" value="0">
+                    <div class="rlabel">DOGE</div>
+                </div>
+                <div class="row wag">
+                    <div class="llabel"> <LANGS id="L21">盈利：</LANGS></div>
+                    <input onchange="betbotupdate()" class="wagerset" id="bot_profit" onkeyup="$(&#39;#bot_bet&#39;).val(parseFloat($(this).val()/$(&#39;#bot_payout&#39;).val()).toFixed(9));betbotupdate()" tabindex="4" value="0">
+                    <div class="rlabel">DOGE</div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row wag">
+                    <div class="llabel"><LANGS id="L301">止赚：</LANGS></div>
+                    <input class="wagerset" onchange="betbotupdate()" onkeyup="betbotupdate()" id="bot_stopprofit" value="100.00000">
+                    <div class="rlabel">DOGE</div>
+                </div>
+                <div class="row wag">
+                    <div class="llabel"><LANGS id="L300">止损：</LANGS></div>
+                    <input onchange="betbotupdate()" onkeyup="betbotupdate()" class="wagerset" id="bot_stoploss" value="100.00000">
+                    <div class="rlabel">DOGE</div>
+                </div>
+            </fieldset>
+
+            <div class="row wag">
+                <div class="llabel" style="width:200px;"><LANGS id="L302">单注最大下注额</LANGS></div>
+                <input class="wagerset" onchange="betbotupdate()" onkeyup="betbotupdate()" id="bot_limit" value="1.00000">
+                <div class="rlabel">DOGE</div>
+            </div>
+            <br>
+            <br>
+            <div class="row wag big">
+                <div class="llabel" style=""><LANGS id="L303">胜利后</LANGS></div>
+                <div style="display:inline-block">
+                    <select onchange="betbotupdate()" onkeyup="betbotupdate()" id="bot_afterwin">
+                        <option value="9" id="L304">不改变设定</option>
+                        <option value="0" id="L305">将下注额设到</option>
+                        <option value="1" id="L306">将现时下注额乘</option>
+                        <option value="2" id="L307">将现时下注额加</option>
+                        <option value="3" id="L308">将现时下注额除</option>
+                        <option value="4" id="L309">将现时下注额减</option>
+                    </select>
+                    <input id="bot_afterwinvar" onchange="betbotupdate()" onkeyup="betbotupdate()" class="wagerset" value="1.00000">
+                    <select onchange="betbotupdate()" onkeyup="betbotupdate()" id="bot_afterwindir">
+                        <option value="0" id="L310">並不更换押大押小</option>
+                        <option value="1" id="L311">並更换押大押小</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row wag big">
+                <div class="llabel" style=""><LANGS id="L312">失败后</LANGS></div>
+                <div style="display:inline-block">
+                    <select onchange="betbotupdate()" onkeyup="betbotupdate()" id="bot_afterloss">
+                        <option value="9" id="L304">不改变设定</option>
+                        <option value="0" id="L305">将下注额设到</option>
+                        <option value="1" id="L306">将现时下注额乘</option>
+                        <option value="2" id="L307">将现时下注额加</option>
+                        <option value="3" id="L308">将现时下注额除</option>
+                        <option value="4" id="L309">将现时下注额减</option>
+                    </select>
+                    <input id="bot_afterlossvar" onchange="betbotupdate()" onkeyup="betbotupdate()" class="wagerset" value="1.00000">
+                    <select onchange="betbotupdate()" onkeyup="betbotupdate()" id="bot_afterlossdir">
+                        <option value="0" id="L310">並不更换押大押小</option>
+                        <option value="1" id="L311">並更换押大押小</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <br>
+            <select onchange="betbotupdate()" onkeyup="betbotupdate()" id="bot_dir">
+                <option value="1" id="L36">大</option>
+                <option value="0" id="L37">小</option>
+            </select>
+            <br>
+
+            <div class="button_inner_group">
+                <button class="btn btn-large btn-primary play" onclick="initbot()" id="bot_start"><LANGS id="L313">开始</LANGS></button>
+            </div>
+
+            <select onchange="betbotupdate()" onkeyup="betbotupdate()" id="bot_speed">
+                <option value="1" id="L192">快</option>
+                <option value="2" id="L193">普通</option>
+                <option value="3" id="L194">慢1</option>
+            </select>
+
+        </div>
+        <!-- /auto -->
+
+        <div class="tab-pane fade" id="follow">
+            <br>
+            <div class="row wag">
+                <div class="llabel" style="width:200px;">跟从用户（ID）</div>
+                <input class="wagerset" onchange="followbotupdate()" onkeyup="followbotupdate()" id="followid" value="">
+                <div class="rlabel"></div>
+            </div>
+            <div class="row wag">
+                <div class="llabel" style="width:200px;">投注金额比率</div>
+                <input id="followrate" onchange="followbotupdate()" onkeyup="followbotupdate()" class="wagerset" value="100">
+                <div class="rlabel">%</div>
+            </div>
+            <br>
+            <div class="row wag">
+                <div class="llabel" style="width:200px;">止赚</div>
+                <input class="wagerset" onchange="followbotupdate()" onkeyup="followbotupdate()" id="followwin" value="1.00000">
+                <div class="rlabel">DOGE</div>
+            </div>
+            <div class="row wag">
+                <div class="llabel" style="width:200px;">止损</div>
+                <input id="followloss" onchange="followbotupdate()" onkeyup="followbotupdate()" class="wagerset" value="1.00000">
+                <div class="rlabel">DOGE</div>
+            </div>
+            <br>
+            <br>
+            <br> <b>输入好所有选项才可开始</b>
+            <p></p>
+            <br>
+            <div id="textdesc">
+                当您指定的跟从用户
+                <span id="folid"></span>
+                下注时，根据该用户的赔率与投注金额乘
+                <span id="folrate"></span>
+                %以同样模式跟随下注，幸运数以跟从用户的种子和序号来计算。
+                <p></p>
+                而当利润大于
+                <span id="folwin"></span>
+                DOGE或损失大于
+                <span id="folloss"></span>
+                DOGE将会停止自动下注。
+            </div>
+            <br>
+            <div class="play-actions text-center button_group button_group" id="bet_buttons">
+                <div class="button_inner_group">
+                    <button class="btn btn-large btn-primary play waitingz" onclick="initfollowbot()" id="followbotstart">开始</button>
+                </div>
+            </div>
+        </div>
+        <!-- /follow --> </div>
+</div>
+    
+<div id="console" style="background: rgba(255, 255, 255, 0.6);margin-top: 18px;" class="hide">
+    <br>
+    <div style="width:888px;text-align:left;background:#FFF;color:#000;height:320px; overflow-y:scroll; " class="ctext"></div>
+    <br>
+    <br>
+    <div class="play-actions text-center button_group button_group" id="bet_buttons">
+        <!--<div class="button_inner_group">-->
+        <!--<button class="btn btn-large btn-primary play" onclick="stopallbot(0)" id="stopbot"><LANGS id="L49">停止</LANGS></button>-->
+        <!--</div>-->
+        <div class="button_inner_group">
+            <button class="btn btn-large btn-primary play" onclick="stopallbot(1)" id="stopbot"><LANGS id="L50">停止并关闭操作监视</LANGS></button>
+        </div>
+        <!--<div class="button_inner_group">-->
+        <!--<button class="btn btn-large btn-primary play" onclick="logbotdata()" id="stopbot"><LANGS id="L51">获取数据</LANGS></button>-->
+        <!--</div>-->
+        <div class="button_inner_group">
+            <button class="btn btn-large btn-primary play" onclick="$(&#39;.ctext&#39;).text(&#39;&#39;)" id="stopbot"><LANGS id="L52">清除数据</LANGS></button>
+        </div>
+    </div>
+</div>
+
+    <br />
+    <div class="btn-group tabbar small" data-toggle="buttons-radio" style="width:100%;">
+        <button class="btn active" data-toggle="tab" data-target="#all" ><LANGS id="L1">所有</LANGS> </button>
+        <button class="btn" data-toggle="tab" data-target="#me"><LANGS id="L2">我的</LANGS> </button>
+        <button class="btn" data-toggle="tab" data-target="#chat"><LANGS  id="L3">聊天室</LANGS> </button>              
+        <button class="btn" data-toggle="tab" data-target="#stats"><LANGS id="L4">统计</LANGS></button>
+        <button class="btn" data-toggle="tab" data-target="#fair"><LANGS  id="L5">公平</LANGS></button>
+        <button class="btn" data-toggle="tab" data-target="#account"><LANGS id="L0">我的账户</LANGS></button>
+        <button class="btn" data-toggle="tab" data-target="#invest"><LANGS  id="L7">投资</LANGS></button>
+        <button class="btn" data-toggle="tab" data-target="#stock"><LANGS id="L8">股票</LANGS></button>
+        
+        <button class="btn" data-toggle="tab" data-target="#introduce">币种介绍</button>
+        
+         <button class="btn" data-toggle="tab" data-target="#adrace">赌神争霸</button>
+        <button class="btn" data-toggle="tab" data-target="#cold_wallet">冷钱包</button>
+        <button class="btn" data-toggle="tab" data-target="#help"><LANGS  id="L9">帮助</LANGS></button>
+        <!--<button class="btn" data-toggle="tab" data-target="#charts">图表</button>-->
+    </div>
+    <div class="tab-content">
+        
+<div class="tab-pane fade active in" id="all">
+    <div class="results_container">
+        <div class="results_header">
+            <div class="result"><div class="who">
+            <LANGS id="L38">账号</LANGS>
+            </div><div class="when">
+            <LANGS id="L39">时间</LANGS>
+            </div><div class="betid">
+            <LANGS id="L40">投注单号</LANGS>
+            </div><div class="lucky">
+            <LANGS id="L41">幸运数</LANGS>
+            </div><div class="chance">
+            <LANGS id="L42">条件</LANGS>
+            </div><div class="bet">
+            <LANGS id="L33">投注</LANGS>
+            </div><div class="payout">
+            <LANGS id="L32">赔率</LANGS>
+            </div><div class="profit">
+            <LANGS id="L34">盈利</LANGS>
+            </div></div>
+        </div>
+        <div id="all" class="results"></div>
+    </div>
+</div>
+
+        
+<div class="tab-pane fade" id="me">
+    <div class="results_container">
+        <div class="results_header">
+            <div class="result">
+            <div class="result"><div class="who">
+            <LANGS id="L38">账号</LANGS>
+            </div><div class="when">
+            <LANGS id="L39">时间</LANGS>
+            </div><div class="betid">
+            <LANGS id="L40">投注单号</LANGS>
+            </div><div class="lucky">
+            <LANGS id="L41">幸运数</LANGS>
+            </div><div class="chance">
+            <LANGS id="L42">条件</LANGS>
+            </div><div class="bet">
+            <LANGS id="L33">投注</LANGS>
+            </div><div class="payout">
+            <LANGS id="L32">赔率</LANGS>
+            </div><div class="profit">
+            <LANGS id="L34">盈利</LANGS>
+            </div></div>
+
+          </div>
+        </div>
+        <div id="me" class="results">
+            <div class="result win me ">
+    </div>
+    
+
+        </div>
+    </div>
+</div>
+
+        
+<div class="tab-pane fade" id="chat">
+    <div class="panel">
+        <div class="chatscroll">
+            <div class="chatlog"></div>
+        </div>
+        <div class="chatbase">
+            <input class="chatinput typing" maxlength="256" size="100" spellcheck="true">
+            <button class="chatbutton btn btn-large btn-primary">发送</button>
+            <div class="clear"></div>
+            <div class="gap"></div>
+        </div>
+    </div>
+
+</div>
+
+        
+<div class="tab-pane fade panel" id="stats">
+    <div class="statspanel taleft">
+        <h2><LANGS id="L43">我的统计</LANGS></h2>
+        <div class="slabel"><LANGS id="L22">投注量</LANGS>:</div>
+        <span class="bets">0</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L44">赢</LANGS>:</div>
+        <span id="wins2">0</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L45">输</LANGS>:</div>
+        <span id="losses2">0</span>
+        <div class="clear"></div>
+        <div class="slabel" style="display:none">运气:</div>
+        <span id="luck" style="display:none">0.0000</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L20">已投注</LANGS>:</div>
+        <span class="wagered">0.00000000</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L21">(盈利)</LANGS>:</div>
+        <span class="myprofit">0.00000000</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L24">已投资</LANGS>:</div>
+        <span class="investment">0.00000000</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L25">(盈利)</LANGS>:</div>
+        <span class="invest_pft">0.00000000</span>
+        <div class="clear"></div>
+    </div>
+    <div class="statspanel taleft">
+        <h2><LANGS id="L47"><LANGS id="L47">所有玩家统计</h2>
+        <div class="slabel"><LANGS id="L22">投注量</LANGS>:</div>
+        <span class="sbets">0</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L44">赢</LANGS>:</div>
+        <span id="swins">0</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L45">输</LANGS>:</div>
+        <span id="slosses">0</span>
+        <div class="clear"></div>
+        <div class="slabel" style="display:none">运气：</div>
+        <span style="display:none" id="sluck">0.00%</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L20">已投注</LANGS>:</div>
+        <span class="swagered">0</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L21">(盈利)</LANGS>:</div>
+        <span class="sprofit">0</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L46">已投资</LANGS>:</div>
+        <span class="bankroll">0</span>
+        <div class="clear"></div>
+        <div class="slabel"><LANGS id="L48">已投资</LANGS>:</div>
+        <span class="sprofitpct">0.00%</span>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+        
+<div class="tab-pane fade" id="fair">
+    <div class="panel taleft tpad">
+        <h3><LANGS  id="L5">公平性</LANGS></h3>
+        <p><LANGS  id="L53"></LANGS><LANGS  id="L54"></LANGS><LANGS  id="L55"></LANGS>  </p>
+        <p><LANGS  id="L56">您目前正在使用服务器随机种子的SHA256散列值是：</LANGS></p>
+        <div class="monospace">
+            <span id="shash">loading...</span>
+        </div>
+        <p></p>
+        <p><LANGS  id="L57">客户随机种子：</LANGS></p>
+        <div class="monospace">
+            <span id="seed">loading...</span>
+        </div>
+        <p></p>
+        <p><LANGS  id="L58">投注流水号：</LANGS></p>
+        <div class="monospace">
+            <span id="nonce">loading...</span>
+        </div>
+        <p></p>
+        <br>
+        <h3><LANGS  id="L59">算法介绍</LANGS></h3>
+        <p><LANGS  id="L60"></LANGS><LANGS  id="L61"></LANGS><LANGS  id="L62"></LANGS><LANGS  id="L63"></LANGS><LANGS  id="L64"></LANGS><LANGS  id="L65"></LANGS><LANGS  id="L66"></LANGS>
+        
+
+
+        </p>
+        <br>
+        <h3><LANGS  id="L67">投注验证</LANGS></h3>
+        <p>
+            <a target="_blank" href="http://jsfiddle.net/q2yxv187/"><LANGS  id="L68">投注结果验证地址</LANGS></a>
+        </p>
+    </div>
+
+</div>
+
+        
+<div class="tab-pane fade" id="account">
+    <div class="panel taleft tpad">
+        <h3><LANGS id="L69">安全信息</LANGS></h3>   
+        <!-- <button class="btn btn-large" id="logout"><LANGS id="L14">注销</LANGS></button> -->
+        <p><LANGS id="L70">建议使用Google Auth身份认证以增加个人帐户安全性。</LANGS></p>
+        <p>
+            <LANGS id="L71">您的用户ID是</LANGS>
+            <span id="uid">16436</span>
+            .
+        </p>
+        <div id="login">
+            <p>
+                <LANGS id="L72">你的账号是</LANGS>
+                <span>Gggggg</span>
+               
+                <button id="change_password"><LANGS id="L75">修改密码</LANGS></button>
+                
+            </p>
+        </div>
+        <p>
+            <LANGS id="L73">您的网站昵称是</LANGS>
+            <span id="nick">MIB</span>
+            <button id="name"><LANGS id="L76">编辑</LANGS></button>
+        </p>
+        <p>
+            <LANGS id="L74">Google Auth 身份验证</LANGS>
+            <span id="ga_status">已开启</span>
+            <button id="ga_edit"><LANGS id="L76">编辑</LANGS></button>
+        </p>
+        <blockquote style="border:none">
+            <div id="ga_info"></div>
+        </blockquote>
+        <p></p>
+
+     
+        <br>
+        <br>
+        <h3><LANGS id="L77">资金信息</LANGS></h3>
+        <p>
+            <LANGS id="L78">可用余额</LANGS>
+            <span id="user_balance">0.00000000</span>
+            DOGE
+        </p>
+        <p>
+            <LANGS id="L79">充值..未确认金额</LANGS>
+            <span id="user_balance_unrecognized">0.00000000</span>
+            DOGE
+        </p>
+        <p>
+           <LANGS id="L80"> 提款..冻结金额</LANGS>
+            <span id="user_balance_wait">0.00000000</span>
+            DOGE
+        </p>
+        <br>
+        <h3><LANGS id="L81">设定所有投注查询条件</LANGS></h3>
+
+        <ul>
+            <li>
+                <LANGS id="L82">按以下条件显示投注信息：</LANGS>
+                <ul>
+                    <li style="display:none">
+                        赢 &gt;=
+                        <input id="min_risk" class="typing">
+                        DOGE <b>And</b>
+                    </li>
+                    <li style="display:none">
+                        输 &gt;=
+                        <input id="min_change" class="typing">
+                        DOGE <b>And</b>
+                    </li>
+                    <li>
+                        <LANGS id="L83">用户编号 =</LANGS>
+                        <input id="watch_player" value="0" class="typing"></li>
+                    <li>
+                        <LANGS id="L84">赌注下限:</LANGS>
+                        <input id="gminbet" style="cursor:pointer" value="0"></li>
+                </ul>
+            </li>
+            <li style="display:none">
+                设置
+                <input id="roll_delay" class="typing">秒刷新一次</li>
+        </ul>
+        <!--
+        <br>
+        <br>
+        <h3>背景颜色</h3>
+        <br>
+        <select onchange="$(&#39;body&#39;).attr(&#39;style&#39;,&#39;background:url(&#39;+this.value+&#39;) fixed no-repeat; background-size:100% 100%;&#39;)">
+            <option value="http://www.wemakenice.org/media/DarkGradient-0x500.jpg">深海蓝</option>
+            <option value="http://www.wemakenice.org/media/LightGradient-0x500.jpg">米黄</option>
+            <option value="http://www.wemakenice.org/media/GreenGradient-0x500.jpg">草绿</option>
+            <option value="http://www.wemakenice.org/media/RedGradient-0x500.jpg">秋红</option>
+
+        </select>
+        !-->
+</div>
+</div>
+
+        
+<div class="tab-pane fade" id="invest">
+
+    <div class="panel taleft tpad">
+        <br>
+        <br>
+        <div class="dinvestment indent fleft">
+            <p>
+                <LANGS id="L24">您当前已投资</LANGS>
+                <span class="investment">0.00000000</span>
+                DOGE
+                <button id="invest_edit" class="btn btn-small btn-primary"><LANGS id="L96">投资</LANGS></button>
+            </p>
+        </div>
+        <div class="fright rindent">
+            <p>
+               <LANGS id="L87"> 您的投资占庄家总资金</LANGS> 
+                <span class="invest_pct">0.000000%</span>
+                
+            </p>
+        </div>
+        <div class="clear"></div>
+        <div class="dinvestment indent fleft">
+            <p>
+                <LANGS id="L85"> 当前最大投资上限为</LANGS> 
+                <span id="max_invest">3000000000.00</span>
+                DOGE，
+            </p>
+        </div>
+        <div class="dinvestment fleft">
+            <p>
+                <LANGS id="L86"> 还能投资</LANGS> 
+                <span id="max_invest_in">0.00000000</span>
+                DOGE
+            </p>
+        </div>
+        <div class="fright rindent">
+            <p>
+                
+                <a href="/reports/invest"> <LANGS id="L88"> 查看所有投资者</LANGS> </a>
+            </p>
+        </div>
+        <div class="clear"></div>
+        <br>
+        <h2><LANGS id="L89"> 成为庄家！</LANGS> </h2>
+        <p>
+           <LANGS id="L90"> </LANGS>   <b><LANGS id="L91"></LANGS> </b>
+        </p>
+        <p>
+        <LANGS id="L92"></LANGS>                              
+
+        </p>
+        <p><p>
+          <LANGS id="L93"></LANGS><span style="display:none" id="pct_edge">1%</span>      <span>0.8%</span>        <LANGS id="L94"></LANGS>
+        <p><b><LANGS id="L95"></LANGS></b></p>
+    </div>
+
+</div>
+
+        
+<div class="tab-pane fade" id="stock">
+    <div class="panel taleft tpad">
+        <br>
+        
+        
+        <br>
+        <div class="dinvestment indent fleft">
+            <p> <LANGS id="L101">网站总共发行原始股票</LANGS>
+                
+                <span id="all_share_number">0</span>
+                
+            </p>
+        </div>  
+      <div class="clear"></div>        
+        <div class="dinvestment indent fleft">
+            <p> <LANGS id="L102">x</LANGS>
+                
+                <span id="Span1">250000</span>
+                
+            </p>
+        </div>          
+    <div class="clear"></div>          
+        <div class="dinvestment indent fleft">
+            <p> <LANGS id="L103">x</LANGS>
+                
+                <span id="Span2">250000</span>
+                
+            </p>
+        </div>      
+    <div class="clear"></div>       
+        <div class="dinvestment indent fleft">
+            <p> <LANGS id="L97">您当前股票有</LANGS>
+                
+                <span id="my_share_number">0</span>
+                
+            </p>
+        </div>
+
+
+        <div class="clear"></div>
+        <div class="dinvestment indent  fleft">
+            <p>
+                 <LANGS id="L98">本月累积分红总数</LANGS>
+                <span id="share_count">0.00000000</span>
+                DOGE
+            </p>
+        </div>
+        <div class="dinvestment"></div>
+        <div class="clear"></div>
+        <div class="dinvestment indent  fleft">
+            <p>
+                 <LANGS id="L99">本月每股累积分红</LANGS> 
+                <span id="share_price">0.00000000</span>
+                DOGE
+            </p>
+        </div>
+
+        <div class="fright rindent">
+
+        </div>
+        <div class="clear"></div>
+        <div class="dinvestment indent fleft">
+            <p>
+                <LANGS id="L100">本月我的累积分红</LANGS> 
+                <span id="my_share_price">0.00000000</span>
+                DOGE
+            </p>
+        </div>
+
+        
+        <div class="clear"></div>
+        <div class="dinvestment indent fleft">
+            <p>
+               
+                 <a href="/reports/profit/summary"> <LANGS id="L110">查看历史分红</LANGS> </a>
+               
+            </p>
+        </div>      
+        
+        <div class="clear"></div>
+        <br>
+        <h2> <LANGS id="L104">股票介绍！</LANGS></h2>
+        <p>  <LANGS id="L105"></LANGS> <LANGS id="L106"></LANGS> <LANGS id="L107"></LANGS> <LANGS id="L108"></LANGS> <LANGS id="L109"></LANGS></p>
+        <br>
+        <!--
+        <h2>如何获取股票？</h2>
+        <br>
+        <h3>玩家</h3>
+        <ul>
+            <li>网站累积总投注0      ~99,999 DOGE时, 个人累计实际盈亏额每1 DOGE送1股。（约100,000股）</li>
+            <li>网站累积总投注100,000~199,999 DOGE时, 个人累计实际盈亏额每2 DOGE送1股。（约50,000股）</li>
+            <li>网站累积总投注200,000~299,999 DOGE时, 个人累计实际盈亏额每4 DOGE送1股。（约25,000股）</li>
+            <li>网站累积总投注300,000~399,999 DOGE时, 个人累计实际盈亏额每8 DOGE送1股。（约12,500股）</li>
+            <li>网站累积总投注400,000~送完25万股为止, 个人累计实际盈亏每16 DOGE送1股。</li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <p>
+                例子：如果是个人累计实际盈亏额每 1 DOGE送1股时, 玩家第一次投注0.8 DOGE, 2倍赔率，无论亏损或获胜都累积0.8股;第
+二次投注0.8 DOGE, 2倍赔率，无论亏损或获胜都继续累积为1.6股。因累积值已超过1，故第二次投注後派发1股，累积值变成0.6。
+            </p>
+        </ul>
+        <p></p>
+        <p></p>
+        <br>
+        <h3>庄家</h3>
+        <ul>
+
+            <li>每 4 分钟对全体庄家合计送出一股，依各别庄家所占投资比例分配，满一股时就派发。</li>
+            &nbsp;&nbsp;&nbsp;&nbsp;例子：如果庄家上限500 DOGE，您此时入资100B(占20%)，其他庄家入资400B(占80%),每
+            <span>4</span>
+            分钟系统自动为您累积0.2股，满一股时派发。
+        </ul>
+        <p></p>
+        <p></p>
+
+        <br>
+        <br>
+        <p>
+            <b>送股方案可能会随时调整，但营运方保证送出25万股。</b>
+        </p>
+        -->
+    </div>
+
+</div>
+
+        
+<div class="tab-pane fade" id="charts">
+    <div class="panel">
+        <br>
+        <div style="width:100%;" id="graphings">
+            <canvas style="height:300px;width:100%" id="chartarea">加載中</canvas>
+            <br>
+            节点:
+            <span onclick="$(this).text(parseInt(prompt(\&quot;输入最大节点量（过多会吃RAM）\&quot;,400)))" id="gnodespoint" style="cursor:pointer">250</span>
+            庄主利润
+            <input type="checkbox" id="ghouseprofit" checked="" style="width:13px">
+            庄款
+            <input type="checkbox" id="ghouse" style="width:13px">
+            赌注量
+            <input type="checkbox" id="gbets" style="width:13px">
+            我的赌注量
+            <input type="checkbox" id="gmybets" style="width:13px">
+            我的下注盈利
+            <input type="checkbox" style="width:13px" id="gmywin">
+            坐庄盈利
+            <input type="checkbox" style="width:13px" id="gmyhouseprofit"></div>
+    </div>
+</div>
+
+        
+<div class="tab-pane fade" id="introduce">
+    <div class="panel taleft tpad">
+<h3>一、比特币（bitcoin,BTC）</h3>
+<p>比特币，英文名BitCoin，简称BTC，总量2100万个，POW币，SHA256算法，出现于2008年！比特币是建立在全球去中心化P2P网络系统上的，没有央行和第三方机构参与发行的，总量固定、交易便捷、全球流通、完全匿名的电子货币系统。 比特币通过特定算法的矿机大量计算产生，比特币经济使用整个P2P网络中众多节点构成的分布式数据库来确认并记录所有的交易行为、安全可靠！</p>
+<p>交易比特币网站：<a target="_blank" href="https://www.okcoin.cn">okcoin</a>&nbsp;&nbsp; <a target="_blank" href="https://btcchina.com">比特币中国</a>
+</p>
+<p>比特币地址、转账交易号（TXID）查询网站：<a target="_blank" href="https://blockchain.info">https://blockchain.info</a></p>
+
+<h3>二、莱特币（litecoin,LTC）</h3>
+<p>莱特币，英文名litecoin,简称LTC,中国币圈俗称辣条，POW币， scrypt算法，出现于2011年10月,曾经是市值最高的竞争币。莱特币是比特币的一个简单变种，它对比特币算法进行了简单修改，使得总量是比特币的四倍，每笔交易的验证时间也相应下降为前者的1/4。</p>
+<p>交易莱特币网站：
+    <a target="_blank" href="https://www.okcoin.cn">okcoin</a>&nbsp;&nbsp;
+    <a target="_blank" href="https://btcchina.com">比特币中国</a>&nbsp;&nbsp;
+    <a target="_blank" href="http://www.btc38.com">比特时代</a></p>
+<p>莱特币地址、转账交易号（TXID）查询网站：<a target="_blank" href="http://block-explorer.com">http://block-explorer.com</a></p>
+
+<h3>三、狗狗币（dogecoin）</h3>
+<p>狗狗币，英文名dogecoin, POW币， scrypt算法,目前与LTC合并挖矿，出现于2013年12月，狗狗币很好地利用了小费文化，是目前人气较高的竞争币。狗狗币总量为1000亿，挖完后每年增发50亿。</p>
+<p>交易狗狗币网站: 
+    <a target="_blank" href="http://www.btc38.com">比特时代</a></p>
+<p>狗狗币地址、转账交易号（TXID）查询网站：<a target="_blank" href="http://dogechain.info">http://dogechain.info</a></p>
+
+<h3>四、元宝币（YBcoin,YBC）</h3>
+<p>元宝币，英文名YBcoin,元宝币的创始人是一群中国数字货币爱好者和支持者，在看到比特币的问题之后，决定尽自己的力量，用最新的技术，来开发一款适合中国人使用、人人都可以参与、公正公开透明的电子货币。元宝币独创的采用了VPOW+POS的挖矿机制来更有效的控制通货膨胀和体系失血，以促进体系的稳定。新元宝币发行总量300W， 发行后除了每年1%的POS利息之外，不会有新的币产生。 在运营方面，有元宝基金会来代表社区进行高效的推广管理。元宝币还是太一个人数字银行系统的重要组成部分。</p>
+<p>元宝币官网：<a target="_blank" href="http://www.ybcoin.com">http://www.ybcoin.com/</a><br />
+交易元宝币网站：
+    <a target="_blank" href="http://www.btc38.com">比特时代</a>&nbsp;&nbsp;
+    <a target="_blank" href="https://yuanbaohui.com">元宝汇</a>&nbsp;&nbsp;
+    <a target="_blank" href="http://www.btctrade.com">btctrade</a>&nbsp;&nbsp;
+    <a target="_blank" href="http://www.btc100.com">btc100</a>&nbsp;&nbsp;
+    <a target="_blank" href="http://www.allcoin.com">allcoin</a>
+</p>
+<p>元宝币地址、转账交易号（TXID）查询网站：<a target="_blank" href="http://explorer_ybc.taiyilabs.com/">http://explorer_ybc.taiyilabs.com/</a></p>
+
+<h3>五、智慧币（SPC）</h3>
+<p>智慧币，英文名sophiacoin,总量：4.2亿，发行方式：IPO+POW，CPU挖矿</p>
+<p>智慧币官网：<a target="_blank" href="http://www.sophiacoin.net/">http://www.sophiacoin.net/</a><br />
+交易智慧币网站：
+    <a target="_blank" href="http://www.zhgtrade.com">众股网</a>&nbsp;&nbsp;
+</p>
+<p>智慧币地址、转账交易号（TXID）查询网站：<a target="_blank" href="http://123.56.82.249:3001/">http://123.56.82.249:3001/</a></p>
+<p>智慧币钱包下载地址：<a target="_blank" href="http://pan.baidu.com/s/1dDOUcH7">http://pan.baidu.com/s/1dDOUcH7</a></p>
+
+<h3>六、口袋币（BGC）</h3>
+<p>口袋币，英文名bagcoin,总量：1亿，发行方式：IPO+POW，X11算法显卡挖矿</p>
+<p>口袋币官网：<a target="_blank" href="http://www.bagcoin.com">http://www.bagcoin.com</a><br />
+交易口袋币网站：<a target="_blank" href="http://www.zhgtrade.com">众股网</a>&nbsp;&nbsp;
+</p>
+
+<h3>七、蚂蚁币（ATC）</h3>
+<p>蚂蚁币，英文名antcoin,总量：2.1亿，发行方式：IPO+POS，POS利息年息8%</p>
+<p>蚂蚁币官网：<a target="_blank" href="http://www.antcoin.cc">www.antcoin.cc</a> <br/>
+交易蚂蚁币网站： <a target="_blank" href="http://www.coinvc.com">币交所</a> <a href="http://www.btc567.com">BTC567</a></p>
+<p>蚂蚁币地址、转账交易号（TXID）查询网站：<a target="_blank" href="http://101.200.196.174:83/">http://101.200.196.174:83/</a></p>
+<p>蚂蚁币钱包下载地址：<a target="_blank" href="http://pan.baidu.com/s/1dEkfRhv">http://pan.baidu.com/s/1dEkfRhv</a></p>
+
+<h3>八、liskplayshare（LPS）</h3>
+<p>LPS，全称liskplayshare,总量1亿，是BTCDICE团队旗下基于LISK侧链的LISKPLAY游戏平台的代币和股权，拥有LISKPLAY平台100%的分红权益。</p>
+<p>钱包下载地址：<a target="_blank" href="http://www.liskplay.com">www.liskplay.com</a> <br/>
+</p>
+
+<h3>九、ZCASH（ZEC）</h3>
+<p>ZCASH，总量：2100万，发行方式：POW。</p>
+<p>交易ZCASH网站: <a target="_blank" href="http://www.yuanbao.com">元宝网（www.yuanbao.com）</a> <a target="_blank" href="http://www.yunbi.com"> 云币网(www.yunbi.com)</a><br/>
+</p>
+<p>ZCASH地址、转账交易号（TXID）查询网站：<a target="_blank" href="https://explorer.z.cash">https://explorer.z.cash</a>
+</p>
+    </div>
+</div>
+
+
+        
+<div class="tab-pane fade" id="adrace">
+    <div class="panel taleft tpad" style="text-align:center">
+        <!--<p style="padding-top: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BTC-DICE最大的中文数字货币骰子娱乐平台已运营两周年啦，投注返利翻倍为玩家投注形成分红的20%，从即日起，截至每晚12点整，当日各币种盈利排行前三名且盈利数额为奖励的10倍以上的玩家将会获得赌神奖励。</p>-->
+        <p><image src="/images/ad.jpg" width="100%" /></p>
+        <div style="text-align:left">
+        <p>1.BTCDICE数字货币骰子娱乐站开业三周年，为感谢各位玩家的支持和厚爱，BTCDICE官方决定推出每月赌神争霸送IPHONE7plus，每周赌神争霸送莱特币活动。</p>
+        <p>2.从2016年11月1日起，每日BTC,LTC,DOGE币种盈利排行前三名，第一名获得3赌神积分，第二名获得2赌神积分，第三名获得1赌神积分。<br />
+        &nbsp;&nbsp;&nbsp;（1）每周赌神奖励活动送莱特币：每周（统计区间为每周一零点零分至下周一零点零分）赌神积分排名前十名的玩家将获得该玩家此周累计赌神积分三倍的LTC。（每周统计一次，赌神积分不累计。<br />
+        &nbsp;&nbsp;&nbsp;（2）每月赌神活动送IPHONE7 plus128G。<br />
+        每月（1日—下个月1日凌晨零点零分）累计获得赌神积分第一名的玩家将获得IPHONE7plus 128G一台。</p>
+
+        <p>3. 若出现每周赌神积分相同并列第十名，每月赌神积分相同并列第一名的情况，按当日比特时代各币种牌价换算成RMB后，取总盈利最大者。</p>
+        <p>4.BTCDICE官方拥有对此活动的解释权。</p>
+        <p>5.BTCDICE官方QQ群： 528795962。</p>
+        </div>
+
+        <!--         <p>BTC前三名分别奖励：0.1BTC,0.05BTC,0.02BTC</p>
+                <p>LTC前三名分别奖励：10LTC,5LTC,2LTC</p>
+                <p>DOGE前三名分别奖励：10万doge,5万doge,2万doge</p>
+                <p>元宝币前三名分别奖励：10YBC,5YBC,2YBC</p>
+                <p>请获奖的赌神加入官方Q群 417869372，将地址私聊赌王领奖。</p>
+                <p>本网站保留对活动的解释权。</p>
+         -->    </div>
+</div>
+
+        
+<div class="tab-pane fade" id="cold_wallet">
+    <div class="panel taleft tpad">
+<style type="text/css">
+
+.wrap {
+  width: 900px;
+  margin: 0 auto;
+}
+.address { 
+  height: 390px;
+  margin-bottom: 32px;
+}
+.address dl {
+  width: 180px;
+  float: left;
+}
+.address dt {
+  margin-bottom: 32px;
+  width: 180px;
+  font-size: 16px;
+  color: #f60;
+  text-align: center;
+  
+}
+.address ul {
+  width: 720px;
+  float: left;
+}
+.address li {
+  display: list-item
+  height: 86px;
+  white-space: nowrap;
+}
+.address li h3 {
+  font-size: 20px;
+  line-height: 25px;
+  padding-top: 8px;
+}
+.address li p font {
+  font-size: 11px;
+}
+.public {
+   border-collapse: collapse;
+  border-spacing: 0;    
+} 
+
+ </style>
+
+<div><image src="/images/slogan900.png" /></div>
+<div  style="padding-left: 30px;padding-top: 30px;">
+  <h3>BTC-DICE骰子娱乐站冷钱包地址公开</h3>
+  <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正规化运营、资产数据透明化先驱</h5>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BTC-DICE冷钱包内的数字货币至少会占到数字货币总数的50%以上，另外20%部分会存放在服务器热钱包里供玩家随时提现，其余会存放在需离线签名的第二热钱包。BTC-DICE平台的元宝币存放在元宝官方交易平台元宝网，故冷钱包地址提供的是BTC-DICE在元宝网账户的存币地址。</p>
+</div>
+<div class="wrap mb10">
+  <div class="address">
+     <dl>
+       <dt>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="public">
+          <tbody><tr>
+            <td align="center" height="86" valign="middle">BTC 冷钱包地址</td>
+          </tr>
+        </tbody></table>
+       </dt>
+       <dt>
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tbody><tr>
+            <td align="center" height="86" valign="middle">LTC 冷钱包地址</td>
+          </tr>
+        </tbody></table>
+       </dt>
+       <dt>
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tbody><tr>
+            <td align="center" height="86" valign="middle">DOGE 冷钱包地址</td>
+          </tr>
+        </tbody></table>
+       </dt>
+       <dt>
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tbody><tr>
+            <td align="center" height="86" valign="middle">YBC 冷钱包地址</td>
+          </tr>
+        </tbody></table>
+       </dt>
+     </dl>
+     <ul>
+         <li>
+         <h3><a href="https://blockchain.info/zh-cn/address/1FNAyTFxyy6FZkfSVsZK9dCEHfdMjM57gi" target="_blank">1FNAyTFxyy6FZkfSVsZK9dCEHfdMjM57gi</a></h3>
+         <p>签名信息：<font>btcdice.com</font></p>
+         <p>签名：<font>IGbvPQWkWJOvm4Yx3ko/DDl90J31K6yRLUeP+r8SXLItPPGsSF7jO9KDRE7YZSH0LeqW/Hz4X9xwum1+uZ8u4dY=</font></p>
+         </li>
+         <li>
+         <h3><a href="http://ltc.blockr.io/address/info/Lh613tQNmxcHP42rAT8cxiyMt23mjRtnRu" target="_blank">Lh613tQNmxcHP42rAT8cxiyMt23mjRtnRu</a></h3>
+         <p>签名信息：<font>btcdice.com</font></p>
+         <p>签名：<font>IPZ/B+oQ1f5ZeAln4tNbRRy7Zh/kGU/3CBBKZxpiVwMkG7y5UPp3Yv4Qm5XHsttUTRGVyB2vptLF23kaxV0g2gg=</font></p>
+         </li>
+         <li>
+         <h3><a href="https://dogechain.info/address/DUDhXmnCHp9f6LV64zcv6DyrtucEHjMiGv" target="_blank">DUDhXmnCHp9f6LV64zcv6DyrtucEHjMiGv</a></h3>
+         <p>签名信息：<font>btcdice.com</font></p>
+         <p>签名：<font>IN/1w59Z+yUlEWPbWXNM2g5GbIcCY4/gSY5eZdjZf6+KraX37MWYQdwos7hg+vZUm2Q4s8kAvfTcBuoBewLbeOM=</font></p>
+         </li>
+         <li>
+         <h3><a href="http://explorer_ybc.taiyilabs.com/address/yMbyKBuxeWDmBZUb3UNt1DhTLQpNgmL2sr" target="_blank">yMbyKBuxeWDmBZUb3UNt1DhTLQpNgmL2sr</a></h3>
+         <!-- <p>签名信息：<font>btc-dice.com</font></p>
+         <p>签名：<font>Hw/pU9a73kMVMne7nMDRT6715IUL50aphNvwI3uLrlDc0f2rncS9XQPwhMCQllcvsumiBQ/+vTbPyr1ADhgxcUE=</font></p> -->
+         </li>
+     </ul>
+  </div>
+</div>
+</div>
+</div>
+
+         
+<div class="tab-pane fade" id="help">
+    <div class="panel taleft tpad">
+        <h3>1、这是什么地方？</h3>
+        <p>btcdice.com是一家2013年7月开业，由一帮台湾比特币爱好者团队运营的支持数字货币的骰子猜大小平台，在这里您可以玩可验证公平的即时开奖骰子游戏，返奖率高达99％。您可以自由设定获胜机率和投注金额，然后选择“押大或押小”投注后会即时返回结果。另外，您可以点击“投资”，在网站选择投资当庄家，和其他投注的玩家对赌。同时帮助我们的玩家提高了单注最大盈利。网站还有一个即时聊天室，您可以在聊天室与其他玩家互动。目前营运方不接收任何法定货币，也不兑换任何法定货币。</p>
+        
+        <h3>2、如何玩BTC-DICE骰子游戏？</h3>
+        <p>玩家可以选择获胜机率以及投注金额来确定投注的赔率与获胜后的盈利。这是骰子游戏的操作界面：</p>
+        <p><img src="/images/help1.png" style="width:80%; padding-top:-30px" /></p>
+        <p>本图代表玩家以49.5%的获胜机率，投注1LTC，如果获胜将盈利1LTC。玩家点击蓝色方框的押大后，会随机生成一个0.0001-99.9999之间的幸运数，如果幸运数大于50.4999,则玩家获胜，盈利1LTC，如果幸运数小于50.4999则玩家失败，亏损1LTC。</p>
+        <p><img src="/images/help2.png" style="width:80%" /></p>
+        <p>如图所示，该玩家本次投注生成的幸运数是22.5919，小于50.4999，玩家失败，亏损1LTC。</p>
+        <p>什么是获胜机率：代表您有多大的机率会获胜。</p>
+        <p>什么是赔率：赔率是指假如您获胜后，返给您的币数是您投注额的多少倍。</p>
+        <p>什么是投注金额：您下注的金额就是投注金额。</p>
+        <p>什么是获胜盈利：获胜盈利和赔率有关，假如您投注1LTC，赔率是2倍，那么假如您获胜后，您的获胜盈利就是1LTC。</p>
+
+        <h3>3、我该如何充值？</h3>
+        <p>点击网站右上角 [充值] 按钮，再COPY收款地址进行付款操作。</p>
+        <p>每个用户注册后会分配一个唯一的付款钱包地址，可重复使用作为您的充值渠道。</p>
+        <p>按照不同币种的付款机制，您的付款需要1到5个确认后才能被划入到您的帐户上。(确认时间约为5到20分钟)，您可以在存款资料中实时查询。</p>
+
+        <h3>4、我该如何提款？</h3>
+        <p>点击网站右上角 提款 按钮，输入收款地址、金额，如果开启Google Auth身份验证，则输入6位数字验证码，再点击 提款 。
+每次提款将扣除一定金额的手续费作为转账费用，详见提款页面。</p>
+        <p>提款作业全自动处理，每十分钟一次。频繁或大额转帐，系统会自动转人工审核。超过30分钟未到帐的，请通知下管理员。</p>
+
+        <h3>5、投注后能退款嘛？</h3>
+        <p>所有投注的结果是最终且一次性的，不接受任何要求退回投注。</p>
+        <p>如果发现有任何作弊行为，运营方有权利无预警冻结帐户。</p>
+
+        <h3>6、SHA256算法可以解密吗？</h3>
+        <p>安全散列算法SHA（Secure Hash Algorithm）是美国国家安全局 （NSA） 设计，美国国家标准与技术研究院（NIST） 发布的一系列密码散列函数，包括 SHA-1、SHA-224、SHA-256、SHA-384 和 SHA-512 等变体。主要适用于数字签名标准（DigitalSignature Standard DSS）里面定义的数字签名算法（Digital Signature Algorithm DSA）。SHA-256是应用广泛的算法，已经经历了实践的检验，至少在目前为止，都是安全暂不能被解密的。</p>
+
+        <h3>7、网站能操纵投注结果吗？</h3>
+        <p>BTC-DICE游戏的算法是由SHA256算法反向验证结果，这表示网站方是无法控制游戏结果的，玩家可以在第三方网站在线验证游戏结果，详见公平。</p>
+
+        <h3>8、网站如何盈利?</h3>
+        <p>目前网站收取庄家获胜时每一注投注金额 0.8% 为佣金，所有佣金将做为股票红利回馈到股东。</>
+
+        <h3>9、玩家投注返利和推荐人返利</h3>
+        <p>在每个玩家的数字ID下拉菜单，有推广链接，您可以群发推广链接推荐您的朋友来玩，推荐人返利是通过您推广链接注册的玩家，投注形成分红的20%（投注形成分红是该玩家输的每一注金额的0.8%，假如该玩家是2倍赔率的玩法，那返利大概是被推荐玩家投注额的万分之8），系统会于每月底分红时自动发放到您的账户。如果您没有通过推广链接注册，那默认您就是自己的推荐人，推荐人返利每月底发放给您自己。</p>
+
+        <h3>10、下注时出现卡顿怎么办？</h3>
+        <p>在换币种里可以切换到备用线路，网址为 <small>http://www.btcdice1.com</small>。</p>
+
+        <h3>11、怎么联系我们？</h3>
+        <p>Email: 2013btcdice@gmail.com</>
+        <p>QQ群: 528795962</a>
+        <p>新浪微博：BTC-DICE比特币骰子娱乐网</a>
+        
+    </div>
+</div>
+ 
+    </div>
+</center>
+</div>
+
+<div class="tmpbuffer nodisplay"></div>
+<div class="end" style="height:50px;display:block" />
+
+<script type="text/javascript">
+var overlaycolor='rgba(0, 0, 0, 0.5)'
+if(ifmoz()){
+    $('body').addClass('firefox')
+}else if(ifie()){
+    $('body').addClass('ie')
+}else if(ifwebkit()){
+    overlaycolor='rgba(0, 0, 0, 0)'
+    $('#pct_balance').addClass('masked')
+    $('body').addClass('webkit')
+} 
+
+$(document).ready(function () {
+    /*noty({text: "暂停下注，正在进行系统检测，提款和存款作业正常。", layout: 'bottom', type: 'success'});*/
+
+    init();scroll_to_bottom_of_chat();
+
+    InitLang();
+    
+    socket.on('getlogin', function(html){
+       socket.emit('onlogin', { user: 16436, hash: 'e0b913ae7989f619f613ec6a62474c8efaaab8e9bc55a5746976d56f4fa9c7d5', csrf: '82919a7afa331576' });
+    });
+
+    
+    $("#me a").click(function(){ 
+        socket.emit("roll", '82919a7afa331576', this.title);
+        return false; 
+    });
+    $("#all a").click(function(){ 
+        socket.emit("roll", '82919a7afa331576', this.title);
+        return false; 
+    });
+    });
+</script>
+</body>
+</html>

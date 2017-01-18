@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<!--AUI样式框架-->
+		<link rel="stylesheet" type="text/css" href="../css/aui/aui.min.css" />
+		<!--拓展AUI字体图标-->
+		<link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+		<!--通用样式-->
+		<link rel="stylesheet" type="text/css" href="../css/winu-ui.css" />
+		<style type="text/css">
+			body {
+				padding-top: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="aui-content aui-card" id="">
+			<div class="aui-form" id="">
+				<div class="aui-form">
+				<div class="aui-btn-row  winu-clear-both winu-min-height winu-width-100">
+						
+							请选择一个地址，此地址将成为您所有币种的通用地址。		
+						
+					</div>					
+			                           
+				</div>
+			</div>	
+			
+		</div>		
+	
+		<div  id="msglist">
+			
+				<span></span>
+			
+		
+				
+	   </div>
+		
+			
+		
+		<div class="aui-content aui-card" id="frm">
+			<div class="aui-form" id="">
+				<div class="aui-form">
+					<span></span>
+				
+					<div class="aui-btn-row  winu-clear-both winu-min-height winu-width-100">
+						<div class="aui-btn aui-btn-block aui-btn-warning" id="generate">
+							随机产生
+						</div>
+					</div>					
+				</div>
+			</div>	
+			
+		</div>		
+		
+		
+		
+	</body>
+	<!--APICloud自带前端脚本-->
+	<script type="text/javascript" src="../script/api.js"></script>
+	<!--Zepto.js,类似Jquery-->
+	<script type="text/javascript" src="../script/zepto.min.js"></script>
+	<!--通用脚本库-->
+	<script type="text/javascript" src="../script/winu-base.js"></script>
+	<!--表单验证-->
+	<script type="text/javascript" src="../script/coin.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			generate();
+		  function generate(){
+		  	$('#generate').text("产生地址中，请稍等");
+			   var coinKey="",userKey="";
+				_getPrefs(window.coinKey, function(val) {
+				 // _openWin("coin_password", "coin_password_win.html");
+				    //var obj={}
+				   
+					if (val && val!="") {
+						//obj.k1= val
+						//alert(JSON.stringify(val));
+						coinKey=val;
+						var rong_token=  _getStorage("rong_token");
+						 //alert(val);
+							if (val && val!="") {
+								userKey=val;
+								
+								addMsgList(coinKey,rong_token,10)
+								$('#generate').text("重新生成");
+							} else {
+	
+							}
+											
+					} else {
+						//_openWin("coin_password", "coin_password_win.html");
+					}
+					
+				
+					
+				});			  
+		  }
+				
+		Zepto(function($) {
+			// 绑定会话点击事件
+			$("#generate").on("tap", function() {
+				generate();
+
+			})
+			$("#msglist").on("tap", ".address", function() {
+			    var key =$(this).attr("data-key")
+			    var k1 =$(this).attr("data-k1")
+			    var k2 =$(this).attr("data-k2")
+			    var k3 =$(this).attr("data-k3")			    			    			    
+			    var address=$(this).attr("data-address")
+				
+				console.log(k1);
+				console.log(k2);
+				console.log(k3);												
+				console.log(address);
+				
+	
+				_setPrefs(window.randomKey, k2, function() {
+								// 存储token到本地存储中
+								
+					var keys=k1+','+k2+','+k3		
+					_sendEvent("addressReady",address);
+					_sendEvent("addressChoosed",keys);
+					
+					// 回到首页
+					_closeToWin("root");
+				});	
+
+			});
+		});
+			function addMsgList(coinKey,userKey,num) {
+			console.log(coinKey,userKey,num)
+			//coin.wallet.encodeStr(userKey)
+				var randomStr=coin.wallet.randomLengthString();
+				var result = coin.wallet.getRandomMultiAddresses(
+				coin.wallet.getCoin("BTC"),
+				coin.wallet.encode(coinKey,userKey),
+				coin.wallet.encode(randomStr,userKey),
+				coin.wallet.encode(userKey,userKey) //rong_token
+				)
+				console.log(userKey)
+				console.log(coin.wallet.encode(coinKey,userKey))
+				console.log(coin.wallet.encode(randomStr,userKey))
+				console.log(coin.wallet.encode(userKey,userKey))
+				console.log(JSON.stringify(result));
+				for (i =0;i < result.length;i++){
+					addMsg(result[i]);
+				}
+				_scrollToEnd();
+				/*
+				for (i =0;i < num;i++){
+					var randomStr=coin.wallet.randomLengthString();
+					//address = coin.wallet.getMultiAddress(coin.wallet.getCoin("BTC"),coinKey,randomStr,userKey)
+						address = coin.wallet.getMultiAddress(coin.wallet.getCoin("BTC"),"123",randomStr,"456")
+					address.key=randomStr
+					console.log(JSON.stringify(address))				
+					addMsg(address);
+				}
+				*/
+			
+			}				
+			function addMsg(msgObj) {	
+				var list ='<div class="aui-content aui-card " id="">'+
+ 							'<div class="aui-form">'+
+ 								'<div class="aui-form">'+	
+									'<div class="address  winu-min-height winu-width-100" '+
+									' data-k1="'+msgObj.k1 +'"'+
+									' data-k2="'+msgObj.k2 +'"'+
+									' data-k3="'+msgObj.k3 +'"'+																		
+									' data-address="'+msgObj.address +'" data-key="'+msgObj.key +'">'+
+										'<div class="aui-btn aui-btn-block aui-btn-info"><h3>'+msgObj.address+'</h3></div>'+
+									'</div>'+
+								'</div></div></div>'	
+					
+					//var list = '<li class="aui-list-view-cell">'+msgObj.content.text+"</li>"
+					$("#msglist span").append(list);	
+					
+		
+			}
+			
+			 //address = coin.wallet.getMultiAddress(coin.wallet.getCoin("BTC"),"fadfdfd1","1231231222","123") //3AX6squchjNr6R4CFEqRCnhMY9YgZ7BPLE
+			//console.log(JSON.stringify(address))
+			//console.log(JSON.stringify(coin.wallet.getCoin("LTC")))		
+			
+		};
+	</script>
+</html>

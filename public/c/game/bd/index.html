@@ -6,12 +6,12 @@
     <meta name='viewport' content='width=device-width,user-scalable=no'>
     <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
     <meta name='apple-mobile-web-app-capable' content='yes'>
-    <meta name='apple-mobile-web-app-title' content='Against The Landlord'>
+    <meta name='apple-mobile-web-app-title' content='DefaultGame'>
     <link rel='apple-touch-icon' href='http://engine.zuoyouxi.com/qici.png'>
     <link rel='apple-touch-startup-image' href='http://engine.zuoyouxi.com/qici.png'>
 
     <link rel="shortcut icon" href="http://engine.zuoyouxi.com/qici.ico" />
-    <title>Against The Landlord</title>
+    <title>DefaultGame</title>
     <style>
         html, body {
             padding: 0;
@@ -26,27 +26,24 @@
         // The game configuration
         var qici = {};
         qici.config = {
-            gameName: 'Against The Landlord',
-            localStorageID: 'com.QCplay.demo.landlord',
+            gameName: 'DefaultGame',
+            localStorageID: 'com.DefaultCompany.Default',
             gameInstance: 'qc_game',
             frameRate: {"mobile":30,"desktop":60},
-            fixedGameSize: {"enabled":false,"width":640,"height":960},
+            fixedGameSize: {"enabled":true,"width":640,"height":960},
             resolutionRatio: 0.25,
             customSettings: {},
-            backgroundColor: 4671303,
+            backgroundColor: 9079434,
             runInBackground: true,
             antialias: true,
             transparent: false,
-            developerMode: false,
-            renderer: 'Auto',
+            developerMode: undefined,
+            renderer: 'Canvas',
             loadingPrefab: '',
             scene: [
-                "Assets/scene/main",
-                "Assets/scene/single",
-                "Assets/scene/online",
-                "Assets/scene/room"
+                "Assets/scene/Slime"
             ],
-            entryScene : 'Assets/scene/main',
+            entryScene : 'Assets/scene/Slime',
             dirtyRectangles: undefined,
             loadingHandler: 'progressHandler',
             loading: {
@@ -75,11 +72,11 @@
             // External scripts for plugins
 
             // User scripts
-            './js/game-scripts-mini-0.1.js'
+            './js/game-scripts-mini-1.js'
         ];
 
         // Asset count that need preload in boot
-        qici.loadingAssetCount = 4;
+        qici.loadingAssetCount = 21;
     </script>
 </head>
 

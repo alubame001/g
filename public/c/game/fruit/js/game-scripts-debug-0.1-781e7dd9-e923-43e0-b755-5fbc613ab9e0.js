@@ -9202,6 +9202,61 @@ UI.prototype.onClick = function() {
     this.background.visible = !this.background.visible;
 };
 // define a user behaviour
+var Bglight = qc.defineBehaviour('qc.engine.Bglight', qc.Behaviour, function() {
+    this.total = 0;
+    this.light_obj_1 = null;
+    this.light_obj_2 = null;
+    
+}, {
+   
+    light1: qc.Serializer.TEXTURE,
+    light2: qc.Serializer.TEXTURE
+    
+
+});
+
+// Called when the script instance is being loaded.
+Bglight.prototype.awake = function() {
+    //  var bg_obj = this.game.add.sprite(this.gameObject);
+   //         bg_obj.texture = this.bg;
+   //         bg_obj.resetNativeSize();
+    this.light_obj_1 = this.game.add.sprite(this.gameObject);
+    this.light_obj_1.texture = this.light1;
+    this.light_obj_1.resetNativeSize();    
+    this.light_obj_2 = this.game.add.sprite(this.gameObject);
+    this.light_obj_2.texture = this.light2;
+    this.light_obj_2.resetNativeSize();    
+        
+    this.light_obj_1.visible = false; 
+    this.light_obj_2.visible = false;    
+      
+    var self = this;
+
+   
+    // 创建定时器
+    var timer = self.timer = self.game.timer.loop(1000, self.updateCounter, self);   
+//
+};
+
+// Called every frame, if the behaviour is enabled.
+//Bdbg.prototype.update = function() {
+//
+//};
+Bglight.prototype.updateCounter = function() {
+    this.total++;
+    if (this.total%3==1) {
+        this.light_obj_1.visible = true;
+        this.light_obj_2.visible = false;     
+
+    } else if (this.total%3==2) {
+            this.light_obj_1.visible = false; 
+            this.light_obj_2.visible = true; 
+    } else {
+             this.light_obj_1.visible = false; 
+            this.light_obj_2.visible = false;       
+    }
+};
+// define a user behaviour
 var Card = qc.landlord.Card = function (){
     this.data = [
         {icon: 'j1.jpg', type: '0', val: 17},
@@ -10074,8 +10129,8 @@ this.bingo.visible = false;
             sprite.resetNativeSize();
            // sprite.x = (sprite.width*obj[0])-10;
             //sprite.y = (sprite.height*obj[1])-10;
-            sprite.x = (76*obj[0]);
-            sprite.y = (76*obj[1]);
+            sprite.x = (70*obj[0]);
+            sprite.y = (78*obj[1]);
             
             
             //sprite.addScript("qc.demo.MjEvent");
@@ -10116,16 +10171,18 @@ DashBoard.prototype.showResult = function(result) {
     tp.to.x =480+(result.fruit*10);
     tp.to.y =0;
     console.log( tp.to.x)
+    /*
     if (this.firstTime==false){
         //var p = Math.floor(this.position.x/10)
         var obj = this.pos[result.fruit]
 
-        this.bingo.x =(76*obj[0]);
-        this.bingo.y =(76*obj[1]);
+        this.bingo.x =(70*obj[0]);
+        this.bingo.y =(78*obj[1]);
 
         tp.from.x =0;
         tp.from.y =0;     
     }
+    */
 
     tp.resetToBeginning();
    
@@ -10162,8 +10219,8 @@ DashBoard.prototype.update = function() {
                 //if (p==48){p=0}
              var obj = this.pos[p]
 
-              this.bingo.x =(76*obj[0]);
-              this.bingo.y =(76*obj[1]);
+              this.bingo.x =(70*obj[0]);
+              this.bingo.y =(78*obj[1]);
               this.bingo.resetNativeSize(); 
             // console.log(this.position.x)
          }
